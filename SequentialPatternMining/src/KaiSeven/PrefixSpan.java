@@ -3,9 +3,12 @@ package KaiSeven;
 import java.awt.print.Printable;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -16,23 +19,22 @@ public class PrefixSpan {
 	public static boolean SHOW_SEQUENTIAL_DATABASE = false;
 	public static boolean SHOW_PROJTABLE_INFORMATION = false;
 	public static boolean SHOW_PATTERM = false;
+	public static boolean SHOW_INDIVIDUAL_PATTERM_COUNT = false;
+	public static boolean WRITE_TO_FILE = true;
 	
 	private SequentialDataBase SDB;
+	private String inputFilePath;
+	private String outputFilePath;
+	private PrintWriter dataOutputWriter;
 	private double min_sup_ratio;
 	private int min_sup;
 	
 	private int countTotalPattern;
 
-	public PrefixSpan() {
-		SDB = null;
-		min_sup_ratio = 0.0;
-		min_sup = 0;
-	}
-
-	public PrefixSpan(String dataPath, double minsupRatio) {
+	public PrefixSpan(String inDataPath, String outDataPath, double minsupRatio) {
 		Scanner dataInput = null;
 		try {
-			dataInput = new Scanner(new FileInputStream(dataPath));
+			dataInput = new Scanner(new FileInputStream(inDataPath));
 		} catch (FileNotFoundException e) {
 			System.out.println("input file error!");
 			System.exit(0);
@@ -96,10 +98,13 @@ public class PrefixSpan {
 			SDB.customerArr[i] = tmpCustomerList.remove();
 		}
 		
-
+		inputFilePath = inDataPath;
+		outputFilePath = outDataPath;
+		dataOutputWriter = null;
+		
 		min_sup_ratio = minsupRatio;
-//		min_sup = 2;	// for Simple data
-		min_sup = (int)Math.ceil(min_sup_ratio*SDB.customerArr.length);
+//		min_sup = 48;	// for Simple data
+		min_sup = (int) Math.ceil(min_sup_ratio * SDB.customerArr.length);
 		
 		countTotalPattern = 0;
 		
@@ -112,6 +117,7 @@ public class PrefixSpan {
 			System.out.println();
 		}
 		
+		System.out.println("######################################################");
 		System.out.println("Sequential DataBase has : " + SDB.customerArr.length + " customers");
 		System.out.println("Under min_sup_ratio : " + min_sup_ratio + " , choose min_sup : " + min_sup);
 		System.out.println("######################################################");
@@ -119,8 +125,22 @@ public class PrefixSpan {
 	}
 
 	public void mining(){
+		if(WRITE_TO_FILE){
+			try {
+				dataOutputWriter = new PrintWriter(outputFilePath, "UTF-8");
+			} catch (FileNotFoundException | UnsupportedEncodingException e) {
+				System.out.println("output file error!");
+				System.exit(0);
+			}
+			
+			dataOutputWriter.println("######################################################");
+			dataOutputWriter.println("Sequential DataBase has : " + SDB.customerArr.length + " customers");
+			dataOutputWriter.println("Under min_sup_ratio : " + min_sup_ratio + " , choose min_sup : " + min_sup);
+			dataOutputWriter.println("######################################################");
+		}
+		System.out.println("start mining...");
 		// count frequent item (can rewrite)
-		ArrayList<Integer> frequentItemList = countFrequentItemFirst();
+		ArrayList<ItemSup> frequentItemList = countFrequentItemFirst();
 		ProjectionTerm[] projectionTalbe = new ProjectionTerm[SDB.customerArr.length];
 		for(int i=0; i<projectionTalbe.length; i++){
 			projectionTalbe[i] = new ProjectionTerm();
@@ -133,16 +153,20 @@ public class PrefixSpan {
 		int countPattern = 0;
 		for(int i=0; i<frequentItemList.size(); i++){
 //		for(int i=0; i<1; i++){
-			itemNum = frequentItemList.get(i);
+			itemNum = frequentItemList.get(i).item;
 			tmpItemNode = new ItemNode(itemNum);
 			tmpTransRecord = new TransRecord(tmpItemNode, tmpItemNode);
 			tmpTransList = new TransList();
 			tmpTransList.addRecord(tmpTransRecord);
 			
 			if(SHOW_PATTERM){
-				tmpTransList.show(); System.out.print("\n");
+				tmpTransList.show(); System.out.println(" : " + frequentItemList.get(i).sup);
 			}
-				
+			
+			if(WRITE_TO_FILE){
+				dataOutputWriter.println(tmpTransList.toString() + " : " + frequentItemList.get(i).sup);
+			}
+			
 			countTotalPattern +=1;
 			
 			// build projection
@@ -189,12 +213,22 @@ public class PrefixSpan {
 			
 			SPmining(projectionTalbe, tmpTransList);
 			
-			System.out.println("------------------------------------------------------");
-			System.out.println("<" + itemNum + " ... > : " + (countTotalPattern - countPattern));
-			System.out.println("======================================================");
-			countPattern = countTotalPattern;
+			if(SHOW_INDIVIDUAL_PATTERM_COUNT){
+				System.out.println("------------------------------------------------------");
+				System.out.println("<" + itemNum + " ... > : " + (countTotalPattern - countPattern));
+				System.out.println("======================================================");
+				countPattern = countTotalPattern;
+			}
 		}
 		
+		if(WRITE_TO_FILE){
+			dataOutputWriter.println("======================================================");
+			dataOutputWriter.println("Total Pattern : " + countTotalPattern);
+			dataOutputWriter.println("======================================================");
+			
+			dataOutputWriter.close();
+		}
+		System.out.println("mining complete!");
 		System.out.println("======================================================");
 		System.out.println("Total Pattern : " + countTotalPattern);
 		System.out.println("======================================================");
@@ -202,8 +236,8 @@ public class PrefixSpan {
 	
 	public void SPmining(ProjectionTerm[] projectionTable, TransList prefix){
 		// count frequent item
-		ArrayList<Integer> frequentItemList = new ArrayList<Integer>();
-		ArrayList<Integer> frequentDashItemList = new ArrayList<Integer>();
+		ArrayList<ItemSup> frequentItemList = new ArrayList<ItemSup>();
+		ArrayList<ItemSup> frequentDashItemList = new ArrayList<ItemSup>();
 		HashMap<Integer, Integer> counterItemSup = new HashMap<Integer, Integer>();
 		HashMap<Integer, Integer> counterDashItemSup = new HashMap<Integer, Integer>();
 		HashSet<Integer> tmpItemSet = new HashSet<Integer>();
@@ -284,15 +318,15 @@ public class PrefixSpan {
 		
 		for(int key: counterItemSup.keySet()){
 			if(counterItemSup.get(key)>= min_sup)
-				frequentItemList.add(key);
+				frequentItemList.add(new ItemSup(key, counterItemSup.get(key)));
 		}
-		Collections.sort(frequentItemList);
+		Collections.sort(frequentItemList, new ItemSupComparator());
 		
 		for(int key: counterDashItemSup.keySet()){
 			if(counterDashItemSup.get(key)>= min_sup)
-				frequentDashItemList.add(key);
+				frequentDashItemList.add(new ItemSup(key, counterDashItemSup.get(key)));
 		}
-		Collections.sort(frequentDashItemList);
+		Collections.sort(frequentItemList, new ItemSupComparator());
 		
 		if(frequentItemList.size() == 0 && frequentDashItemList.size() == 0)
 			return;
@@ -320,15 +354,20 @@ public class PrefixSpan {
 		}
 		
 		for(int i=0; i<frequentItemList.size(); i++){
-			int itemNum = frequentItemList.get(i);
+			int itemNum = frequentItemList.get(i).item;
 			ItemNode tmpItemNode = new ItemNode(itemNum);
 			TransRecord tmpTransRecord = new TransRecord(tmpItemNode, tmpItemNode);
 			TransRecord ptrOrgRearRecord = prefix.lastRecord;
 			prefix.addRecord(tmpTransRecord);
 			
 			if(SHOW_PATTERM){
-				prefix.show(); System.out.print("\n");
+				prefix.show(); System.out.println(" : " + frequentItemList.get(i).sup);
 			}
+			
+			if(WRITE_TO_FILE){
+				dataOutputWriter.println(prefix.toString() + " : " + frequentItemList.get(i).sup);
+			}
+			
 			countTotalPattern +=1;
 			
 			// build new projection
@@ -393,7 +432,7 @@ public class PrefixSpan {
 		
 		// recursive mining (dash item)
 		for(int i=0; i<frequentDashItemList.size(); i++){
-			int itemNum = frequentDashItemList.get(i);
+			int itemNum = frequentDashItemList.get(i).item;
 			ItemNode tmpItemNode = new ItemNode(itemNum);
 			TransRecord ptrOrgRearRecord = prefix.lastRecord;
 			ItemNode ptrOrgRearItem = ptrOrgRearRecord.lastItem;
@@ -402,8 +441,13 @@ public class PrefixSpan {
 			prefix.lastRecord.lastItem = tmpItemNode;
 			
 			if(SHOW_PATTERM){
-				prefix.show(); System.out.print("\n");
+				prefix.show(); System.out.println(" : " + frequentDashItemList.get(i).sup);
 			}
+			
+			if(WRITE_TO_FILE){
+				dataOutputWriter.println(prefix.toString() + " : " + frequentDashItemList.get(i).sup);
+			}
+			
 			countTotalPattern +=1;
 			
 			
@@ -510,7 +554,7 @@ public class PrefixSpan {
 		System.out.println("customer count : " + tmpSet.size());
 	}
 	
-	public ArrayList<Integer> countFrequentItemFirst(){
+	public ArrayList<ItemSup> countFrequentItemFirst(){
 		HashMap<Integer, Integer> itemSupCounter = new HashMap<Integer, Integer>();
 		HashSet<Integer> tmpItemSet = null;
 		TransRecord ptrRecord = null;
@@ -536,12 +580,13 @@ public class PrefixSpan {
 			}
 		}
 		
-		ArrayList<Integer> FrequentItemSet = new ArrayList<Integer>();
+		ArrayList<ItemSup> FrequentItemSet = new ArrayList<ItemSup>();
 		for(int key: itemSupCounter.keySet()){
-			if(itemSupCounter.get(key)>= min_sup)
-				FrequentItemSet.add(key);
+			if(itemSupCounter.get(key)>= min_sup){
+				FrequentItemSet.add(new ItemSup(key, itemSupCounter.get(key)));
+			}
 		}
-		Collections.sort(FrequentItemSet);
+		Collections.sort(FrequentItemSet, new ItemSupComparator());
 		return FrequentItemSet;
 	}
 	
@@ -615,6 +660,16 @@ public class PrefixSpan {
 		}
 	}
 
+	private class ItemSup{
+		int item;
+		int sup;
+		
+		public ItemSup(int i, int s) {
+			item = i;
+			sup = s;
+		}
+	}
+	
 	private class Customer {
 		public int id;
 //		public int recordCount;
@@ -654,10 +709,6 @@ public class PrefixSpan {
 			lastRecord = null;
 		}
 
-//		public TransList(HashSet<Integer> shopItemset) {
-//			firstRecord = new TransRecord(shopItemset);
-//			lastRecord = firstRecord;
-//		}
 
 		public void addRecord(TransRecord oneRecord) {
 			if (lastRecord == null) {
@@ -668,15 +719,6 @@ public class PrefixSpan {
 			lastRecord.nextRecord = oneRecord;
 			lastRecord = oneRecord;
 		}
-		
-//		public void deleteRearRecord(){
-//			if(firstRecord == lastRecord){
-//				firstRecord = null;
-//				lastRecord = null;
-//				return;
-//			}
-//			
-//		}
 		
 		public void show(){
 			System.out.print("<");
@@ -693,13 +735,35 @@ public class PrefixSpan {
 			}
 			System.out.print(">");
 		}
+		
+		public String toString(){
+			String result = "<";
+			if(firstRecord == lastRecord){
+				result += firstRecord.toString();
+			}else{
+				TransRecord tmpPointer = firstRecord;
+				result += tmpPointer.toString();
+				while (tmpPointer.nextRecord != null) {
+					tmpPointer = tmpPointer.nextRecord;
+					result += "," + tmpPointer.toString();
+				}
+			}
+			result  += ">";
+			
+			return result;
+		}
 	}
 
 	private class TransRecord {
 		public ItemNode firstItem;
 		public ItemNode lastItem;
 		public TransRecord nextRecord;
-
+		
+		public TransRecord(){
+			firstItem = null;
+			lastItem = null;
+			nextRecord = null;
+		}
 		public TransRecord(ItemNode first, ItemNode last) {
 			firstItem = first;
 			lastItem = last;
@@ -719,6 +783,23 @@ public class PrefixSpan {
 				}
 			}
 			System.out.print(")");
+		}
+		
+		public String toString(){
+			String result = "(";
+			if(firstItem == lastItem){
+				result += firstItem.itemNum;
+			}else{
+				ItemNode ItemNodeTmpPointer = firstItem;
+				result += ItemNodeTmpPointer.itemNum;
+				while(ItemNodeTmpPointer.nextItem != null){
+					ItemNodeTmpPointer = ItemNodeTmpPointer.nextItem;
+					result += "," + ItemNodeTmpPointer.itemNum;
+				}
+			}
+			result += ")";
+			
+			return result;
 		}
 		
 		public void addItemNode(ItemNode oneItemNode) {
@@ -765,4 +846,13 @@ public class PrefixSpan {
 			nextItem = null;
 		}
 	}
+	
+	private class ItemSupComparator implements Comparator<ItemSup> {
+		@Override
+		public int compare(ItemSup is1, ItemSup is2) {
+			return is1.sup - is1.sup;
+		}
+	}
 }
+
+

@@ -12,9 +12,12 @@ import java.util.StringTokenizer;
 
 
 public class FPGrowthAlpha {
+	private static boolean COLORFUL = false;
+	
 	public static final String ANSI_RESET = "\033[0m";
 	public static final String ANSI_RED = "\033[31m";
 	public static final String ANSI_YELLOW = "\033[33m";
+	
 	private ArrayList<ArrayList<Integer>> DataSet;
 	private HashSet<ItemsetSupport> FrequentItemsets;
 	private FrequentPatternTree FPTree;
@@ -60,7 +63,8 @@ public class FPGrowthAlpha {
 		HTable = null;
 		OrderItemMap = null;
 		min_sup_ratio = minsupRatio;
-		min_sup = (int) ((int) DataSet.size() * minsupRatio) + 1;
+//		min_sup = (int) ((int) DataSet.size() * minsupRatio) + 1;
+		min_sup = 2;
 
 //		System.out.println("--Data Information----------------------");
 //		System.out.println("DataSet.size() : " + DataSet.size() + " and  min_sup : " + min_sup);
@@ -196,7 +200,7 @@ public class FPGrowthAlpha {
 		FrequentItemsets = new HashSet<ItemsetSupport>();
 		HashSet<Integer> TmpItemSet = new HashSet<Integer>();
 		miningSubTree(FPTree, HTable, TmpItemSet);
-//		showFrequentItemsets();
+		showFrequentItemsets();
 //		System.out.println("FrequentItemsets size : " + FrequentItemsets.size());
 	}
 
@@ -380,13 +384,22 @@ public class FPGrowthAlpha {
 	}
 	
 	public String getSimpleResult(){
-		String Result = new String();
-		Result += "========================================\n";
-		Result += "FPGrowth Mining Result\n";
-		Result += "Data size : " + DataSet.size() + " and  min_sup : " + ANSI_RED + min_sup_ratio + ANSI_RESET + "\n";
-		Result += "There are " + ANSI_YELLOW +  FrequentItemsets.size() + ANSI_RESET + " frequent itemsets !\n";
-		Result += "========================================\n";		
-		return Result;
+		String result = new String();
+		if (COLORFUL) {
+			result += "========================================\n";
+			result += "FPGrowth Mining Result\n";
+			result += "Transaction size : " + DataSet.size() + " and  min_sup : " + ANSI_RED + min_sup_ratio + ANSI_RESET + "\n";
+			result += "There are " + ANSI_YELLOW + FrequentItemsets.size() + ANSI_RESET + " frequent itemsets !\n";
+			result += "========================================\n";
+
+		} else {
+			result += "========================================\n";
+			result += "FPGrowth Mining Result\n";
+			result += "Transaction size : " + DataSet.size() + " and  min_sup : " + min_sup_ratio + "\n";
+			result += "There are " + FrequentItemsets.size() + " frequent itemsets !\n";
+			result += "========================================\n";
+		}
+		return result;
 	}
 	
 	private class FrequentPatternTree {
