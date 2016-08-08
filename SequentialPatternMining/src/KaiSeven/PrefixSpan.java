@@ -16,11 +16,11 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class PrefixSpan {
-	public static boolean SHOW_SEQUENTIAL_DATABASE = false;
-	public static boolean SHOW_PROJTABLE_INFORMATION = false;
-	public static boolean SHOW_PATTERM = false;
-	public static boolean SHOW_INDIVIDUAL_PATTERM_COUNT = false;
-	public static boolean WRITE_TO_FILE = true;
+	private static boolean SHOW_SEQUENTIAL_DATABASE = false;
+	private static boolean SHOW_PROJTABLE_INFORMATION = false;
+	private static boolean SHOW_PATTERM = false;
+	private static boolean SHOW_INDIVIDUAL_PATTERM_COUNT = false;
+	private static boolean WRITE_TO_FILE = true;
 	
 	private SequentialDataBase SDB;
 	private String inputFilePath;
@@ -124,6 +124,98 @@ public class PrefixSpan {
 		System.out.println();
 	}
 
+	public PrefixSpan(String inDataPath, String outDataPath, int minsup) {
+		Scanner dataInput = null;
+		try {
+			dataInput = new Scanner(new FileInputStream(inDataPath));
+		} catch (FileNotFoundException e) {
+			System.out.println("input file error!");
+			System.exit(0);
+		}
+
+		StringTokenizer handleLine;
+		int previousSID;
+		int currentSID;
+		int previousTID;
+		int currentTID;
+		ItemNode currentTransFirst = null;
+		ItemNode currentTransRear = null;
+		Customer tmpCustomer = null;
+		LinkedList<Customer> tmpCustomerList = new LinkedList<Customer>();
+		TransList tmpRecordList = null;
+		TransRecord tmpRecord = null;
+
+		handleLine = new StringTokenizer(dataInput.nextLine());
+		previousSID = Integer.parseInt(handleLine.nextToken());
+		previousTID = Integer.parseInt(handleLine.nextToken());
+		currentTransFirst = new ItemNode(Integer.parseInt(handleLine.nextToken()));
+		currentTransRear = currentTransFirst;
+		tmpRecordList = new TransList();
+		while (dataInput.hasNextLine()) {
+			handleLine = new StringTokenizer(dataInput.nextLine());
+			currentSID = Integer.parseInt(handleLine.nextToken());
+			if (currentSID != previousSID) {
+				tmpRecord = new TransRecord(currentTransFirst, currentTransRear);
+				tmpRecordList.addRecord(tmpRecord);
+				tmpCustomer = new Customer(previousSID, tmpRecordList);
+				tmpCustomerList.add(tmpCustomer);
+				tmpRecordList = new TransList();
+				previousTID = Integer.parseInt(handleLine.nextToken());
+				currentTransFirst = new ItemNode(Integer.parseInt(handleLine.nextToken()));
+				currentTransRear = currentTransFirst;
+				previousSID = currentSID;
+			} else {
+				currentTID = Integer.parseInt(handleLine.nextToken());
+				if (currentTID != previousTID) {
+					tmpRecord = new TransRecord(currentTransFirst, currentTransRear);
+					tmpRecordList.addRecord(tmpRecord);
+					currentTransFirst = new ItemNode(Integer.parseInt(handleLine.nextToken()));
+					currentTransRear = currentTransFirst;
+					previousTID = currentTID;
+				} else {
+					currentTransRear.nextItem = new ItemNode(Integer.parseInt(handleLine.nextToken()));
+					currentTransRear = currentTransRear.nextItem;
+				}
+			}
+		}
+		tmpRecord = new TransRecord(currentTransFirst, currentTransRear);
+		tmpRecordList.addRecord(tmpRecord);
+		tmpCustomer = new Customer(previousSID, tmpRecordList);
+		tmpCustomerList.add(tmpCustomer);
+
+		// System.out.println("CustomerList size : " + tmpCustomerList.size());
+		// countCustomerNum(dataPath);
+
+		SDB = new SequentialDataBase(tmpCustomerList.size());
+		for (int i = 0; i < SDB.customerArr.length; i++) {
+			SDB.customerArr[i] = tmpCustomerList.remove();
+		}
+		
+		inputFilePath = inDataPath;
+		outputFilePath = outDataPath;
+		dataOutputWriter = null;
+		
+//		min_sup_ratio = minsupRatio;
+		min_sup = minsup;
+		
+		countTotalPattern = 0;
+		
+		if(SHOW_SEQUENTIAL_DATABASE){
+			for (int i = 0; i < SDB.customerArr.length ; i++) {
+				SDB.customerArr[i].show();
+				System.out.print("\n");
+			}
+			System.out.println("######################################################");
+			System.out.println();
+		}
+		
+		System.out.println("######################################################");
+		System.out.println("Sequential DataBase has : " + SDB.customerArr.length + " customers");
+		System.out.println("choose min_sup : " + min_sup);
+		System.out.println("######################################################");
+		System.out.println();
+	}
+	
 	public void mining(){
 		if(WRITE_TO_FILE){
 			try {

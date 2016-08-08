@@ -2,18 +2,38 @@ package KaiSeven;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class Apriori {
-	public static final String ANSI_RESET = "\033[0m";
-	public static final String ANSI_RED = "\033[31m";
-	public static final String ANSI_YELLOW = "\033[33m";
+	private static boolean COLORFUL_DISPLAY = false;
+	private static boolean SHOW_PATTERM = false;
+	private static boolean SHOW_EACH_SIZE = false;
+	private static boolean WRITE_TO_FILE = true;
+
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_BLACK = "\u001B[30m";
+	public static final String ANSI_RED = "\u001B[31m";
+	public static final String ANSI_GREEN = "\u001B[32m";
+	public static final String ANSI_YELLOW = "\u001B[33m";
+	public static final String ANSI_BLUE = "\u001B[34m";
+	public static final String ANSI_PURPLE = "\u001B[35m";
+	public static final String ANSI_CYAN = "\u001B[36m";
+	public static final String ANSI_WHITE = "\u001B[37m";
+
 	private ArrayList<HashSet<Integer>> DataSet;
 	private int ItemsCount;
 	private ArrayList<ItemsetSupport> FrequentItemsets;
+	private String inputFilePath;
+	private String outputFilePath;
+	private PrintWriter dataOutputWriter;
+	private int countTransaction;
+	private int countFrequentPatterm;
 	private double min_sup_ratio;
 	private int min_sup;
 
@@ -23,14 +43,22 @@ public class Apriori {
 		FrequentItemsets = new ArrayList<ItemsetSupport>();
 	}
 
-	public Apriori(String DataPath, double minsupRatio) {
+	public Apriori(String inDataPath, String outDataPath, double minsupRatio) {
+		long startTime = System.currentTimeMillis();
+		
 		DataSet = new ArrayList<HashSet<Integer>>();
 
+		inputFilePath = inDataPath;
+		outputFilePath = outDataPath;
+		min_sup_ratio = minsupRatio;
+		countFrequentPatterm = 0;
+		
 		Scanner DataInput = null;
 		try {
-			DataInput = new Scanner(new FileInputStream(DataPath));
+			DataInput = new Scanner(new FileInputStream(inDataPath));
 		} catch (FileNotFoundException e) {
 			System.out.println("input file error!");
+			System.out.println(inDataPath + " : not found.");
 			System.exit(0);
 		}
 
@@ -39,6 +67,7 @@ public class Apriori {
 		String TmpHandlingLine = null;
 		StringTokenizer HandlingLine = null;
 		while (DataInput.hasNextLine()) {
+			countTransaction += 1;
 			TmpItemSet = new HashSet<Integer>();
 			TmpHandlingLine = DataInput.nextLine();
 			HandlingLine = new StringTokenizer(TmpHandlingLine, " ,");
@@ -51,12 +80,42 @@ public class Apriori {
 			DataSet.add(TmpItemSet);
 		}
 		FrequentItemsets = new ArrayList<ItemsetSupport>();
-		min_sup_ratio = minsupRatio;
-		min_sup = (int) ((int) DataSet.size() * minsupRatio) + 1;
+		min_sup = (int) Math.ceil(min_sup_ratio * DataSet.size());
+		
+		System.out.println("######################################################");
+		System.out.println("Sale DataBase has " + countTransaction + " transactions");
+		System.out.println("Given min_sup_ratio : " + min_sup_ratio + " , choose min_sup : " + min_sup);
+		System.out.println("######################################################");
+		System.out.println();
+		
+		if (WRITE_TO_FILE) {
+			try {
+				dataOutputWriter = new PrintWriter(outputFilePath, "UTF-8");
+			} catch (FileNotFoundException | UnsupportedEncodingException e) {
+				System.out.println("output file error!");
+				System.exit(0);
+			}
 
-//		System.out.println("--Data Information----------------------");
-//		System.out.println("DataSet.size() : " + DataSet.size() + " and  min_sup : " + min_sup);
-//		System.out.println("----------------------------------------");
+			dataOutputWriter.println("######################################################");
+			dataOutputWriter.println("Sale DataBase has " + countTransaction + " transactions");
+			dataOutputWriter.println("Given min_sup_ratio : " + min_sup_ratio + " , choose min_sup : " + min_sup);
+			dataOutputWriter.println("######################################################");
+		}
+		
+		mining();
+		
+		long stopTime = System.currentTimeMillis();
+		
+		System.out.println(getSimpleResult(stopTime - startTime, false));
+		
+		if (WRITE_TO_FILE) {
+			dataOutputWriter.println(getSimpleResult(stopTime - startTime, true));
+			dataOutputWriter.close();
+		}
+		// System.out.println("--Data Information----------------------");
+		// System.out.println("DataSet.size() : " + DataSet.size() +
+		// " and  min_sup : " + min_sup);
+		// System.out.println("----------------------------------------");
 	}
 
 	public void mining() {
@@ -70,15 +129,24 @@ public class Apriori {
 		int FrontIndex = 0;
 		int ItemsetSize = 2;
 		while (true) {
-			tmpFrontIndex = FrequentItemsets.size();
+			tmpFrontIndex = countFrequentPatterm;
 			if (!calculateFrequentItemsets(FrontIndex, ItemsetSize))
 				break;
 			FrontIndex = tmpFrontIndex;
-			System.out.println("Frequent " + ItemsetSize + "-itemsets size : "
-					+ (FrequentItemsets.size() - FrontIndex));			
+			
+			if(SHOW_EACH_SIZE){
+				System.out.println("------------------------------------------------------");
+				System.out.println("Frequent " + ItemsetSize + "-itemsets size : " + (countFrequentPatterm - FrontIndex));
+				System.out.println("------------------------------------------------------");
+			}
+			
+			if(WRITE_TO_FILE){
+				dataOutputWriter.println("------------------------------------------------------");
+				dataOutputWriter.println("Frequent " + ItemsetSize + "-itemsets size : " + (countFrequentPatterm - FrontIndex));
+				dataOutputWriter.println("------------------------------------------------------");
+			}
 			ItemsetSize++;
 		}
-		System.out.println("-------------------------------------------");
 	}
 
 	public ArrayList<ItemsetSupport> getFrequentItemsets() {
@@ -87,8 +155,7 @@ public class Apriori {
 
 	public String toString() {
 		String FITable = new String();
-		FITable += "There are " + FrequentItemsets.size()
-				+ " frequent itemsets !";
+		FITable += "There are " + FrequentItemsets.size() + " frequent itemsets !";
 		for (int i = 0; i < FrequentItemsets.size(); i++) {
 			FITable += "\n { ";
 			for (int item : FrequentItemsets.get(i).itemset) {
@@ -99,17 +166,28 @@ public class Apriori {
 
 		return FITable;
 	}
-	
-	public String getSimpleResult(){
-		String Result = new String();
-		Result += "========================================\n";
-		Result += "FPGrowth Mining Result\n";
-		Result += "Data size : " + DataSet.size() + " and  min_sup : " + ANSI_RED + min_sup_ratio + ANSI_RESET + "\n";
-		Result += "There are " + ANSI_YELLOW +  FrequentItemsets.size() + ANSI_RESET + " frequent itemsets !\n";
-		Result += "========================================\n";		
-		return Result;
+
+	public String getSimpleResult(long executeTime, boolean flagToFile) {
+		String result = new String();
+		if (COLORFUL_DISPLAY && !flagToFile) {
+			result += ANSI_GREEN + "======================================================" + ANSI_RESET + "\n";
+			result += ANSI_GREEN +"Apriori"+ ANSI_RESET + " Mining Result\n";
+			result += "Transaction size : " + countTransaction + " and  min_sup : " + ANSI_RED + min_sup_ratio + ANSI_RESET + "\n";
+			result += "There are " + ANSI_CYAN + countFrequentPatterm + ANSI_RESET + " frequent itemsets !\n";
+			result += "Execution Time : " + ANSI_CYAN + executeTime + ANSI_RESET + "(ms)\n";
+			result += ANSI_GREEN + "======================================================" + ANSI_RESET + "\n";
+
+		} else {
+			result += "======================================================\n";
+			result += "Apriori Mining Result\n";
+			result += "Transaction size : " + countTransaction + " and  min_sup : " + min_sup_ratio + "\n";
+			result += "There are " + countFrequentPatterm + " frequent itemsets !\n";
+			result += "Execution Time : " + executeTime + "(ms)\n";
+			result += "======================================================\n";
+		}
+		return result;
 	}
-	
+
 	private void createFI1() {
 		ArrayList<ItemsetSupport> tmpTable = new ArrayList<ItemsetSupport>();
 		ItemsetSupport tmpATI = null;
@@ -127,11 +205,28 @@ public class Apriori {
 		}
 		for (int i = 0; i < ItemsCount; i++) {
 			if (tmpTable.get(i).support >= min_sup) {
+				countFrequentPatterm += 1;
+				if(SHOW_PATTERM){
+					System.out.println(tmpTable.get(i).toString());
+				}
+				if(WRITE_TO_FILE){
+					dataOutputWriter.println(tmpTable.get(i).toString());
+				}
 				FrequentItemsets.add(tmpTable.get(i));
 			}
 		}
-		System.out.println("Frequent 1-itemsets size : "
-				+ FrequentItemsets.size());
+		
+		if(SHOW_EACH_SIZE){
+			System.out.println("------------------------------------------------------");
+			System.out.println("Frequent 1-itemsets size : " + FrequentItemsets.size());
+			System.out.println("------------------------------------------------------");
+		}
+		
+		if(WRITE_TO_FILE){
+			dataOutputWriter.println("------------------------------------------------------");
+			dataOutputWriter.println("Frequent 1-itemsets size : " + countFrequentPatterm);
+			dataOutputWriter.println("------------------------------------------------------");
+		}
 	}
 
 	private boolean calculateFrequentItemsets(int FrontIndex, int ItemsetSize) {
@@ -186,12 +281,6 @@ public class Apriori {
 				if (!JoinFlag)
 					continue;
 
-				// System.out.println("got!");
-				// System.out.print("{");
-				// for(int item : tmpItemset){
-				// System.out.print(item + " ");
-				// }
-				// System.out.println("}");
 				CandidateFrequentItemsets.add(tmpItemset);
 			}
 		}
@@ -204,9 +293,6 @@ public class Apriori {
 			tmpTable.add(tmpItemsetSupport);
 		}
 
-		// System.out.println("DB size " + DataSet.size());
-		// System.out.println("tT size " + tmpTable.size());
-		// calculate frequent itemsets
 		boolean ContainFlag;
 		HashSet<Integer> tmpDataSetItemset = null;
 		tmpItemset = null;
@@ -235,17 +321,20 @@ public class Apriori {
 
 		// add new frequent itemsets
 		if (tmpTable.size() > 0) {
+			for(int i=0; i<tmpTable.size(); i++){
+				countFrequentPatterm += 1;
+				if(SHOW_PATTERM){
+					System.out.println(tmpTable.get(i).toString());
+				}
+				if(WRITE_TO_FILE){
+					dataOutputWriter.println(tmpTable.get(i).toString());
+				}
+			}
 			FrequentItemsets.addAll(tmpTable);
 			return true;
 		} else
 			return false;
 	}
-
-	// private ArrayList<ItemsetSupport> createNewItemsetsFromPrevious(
-	// int FrontIndex, int ItemsetSize) {
-	//
-	// return null;
-	// }
 
 	private class ItemsetSupport {
 		public HashSet<Integer> itemset;
@@ -260,13 +349,16 @@ public class Apriori {
 			itemset = new HashSet<Integer>(its);
 			support = 0;
 		}
-
-//		public ItemsetSupport(int[] its) {
-//			itemset = new HashSet<Integer>();
-//			for (int i : its) {
-//				itemset.add(i);
-//			}
-//			support = 0;
-//		}
+		
+		public String toString() {
+			String result = "{";
+			Iterator<Integer> itor = itemset.iterator();
+			result += itor.next();
+			while (itor.hasNext()) {
+				result += "," + itor.next();
+			}
+			result += "} : " + support;
+			return result;
+		}
 	}
 }

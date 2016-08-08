@@ -1,10 +1,9 @@
 package KaiSeven;
 
-import java.awt.print.Printable;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -16,11 +15,19 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class FPGrowth {
-	private static boolean COLORFUL = false;
+	private static boolean COLORFUL_DISPLAY = false;
+	private static boolean SHOW_PATTERM = false;
+	private static boolean WRITE_TO_FILE = true;
 
-	public static final String ANSI_RESET = "\033[0m";
-	public static final String ANSI_RED = "\033[31m";
-	public static final String ANSI_YELLOW = "\033[33m";
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_BLACK = "\u001B[30m";
+	public static final String ANSI_RED = "\u001B[31m";
+	public static final String ANSI_GREEN = "\u001B[32m";
+	public static final String ANSI_YELLOW = "\u001B[33m";
+	public static final String ANSI_BLUE = "\u001B[34m";
+	public static final String ANSI_PURPLE = "\u001B[35m";
+	public static final String ANSI_CYAN = "\u001B[36m";
+	public static final String ANSI_WHITE = "\u001B[37m";
 
 	// private ArrayList<ArrayList<Integer>> DataSet;
 	// private HashSet<ItemsetSupport> FrequentItemsets;
@@ -28,25 +35,29 @@ public class FPGrowth {
 	private HeaderTable headerTable;
 	private String inputFilePath;
 	private String outputFilePath;
+	private PrintWriter dataOutputWriter;
 	private int countTransaction;
 	private int countFrequentPatterm;
 	private double min_sup_ratio;
 	private int min_sup;
 
 	public FPGrowth(String inDataPath, String outDataPath, double minsupRatio) {
+		long startTime = System.currentTimeMillis();
+		
+		inputFilePath = inDataPath;
+		outputFilePath = outDataPath;
+		min_sup_ratio = minsupRatio;
+		countFrequentPatterm = 0;
+		
 		Scanner DataInput = null;
 		try {
 			DataInput = new Scanner(new FileInputStream(inDataPath));
 		} catch (FileNotFoundException e) {
-			System.out.println("input file error!");
+			System.out.println("input file error ! ");
+			System.out.println(inDataPath + " : not found.");
 			System.exit(0);
 		}
 		
-		inputFilePath = inDataPath;
-		outputFilePath = outDataPath;
-		countFrequentPatterm = 0;
-		min_sup_ratio = minsupRatio;
-
 		// First Scan Database & Count Frequent Item Table
 		HashMap<Integer, Integer> countItemFrequency = new HashMap<Integer, Integer>();
 		countTransaction = 0;
@@ -63,10 +74,10 @@ public class FPGrowth {
 					countItemFrequency.put(tmpItemNum, countItemFrequency.get(tmpItemNum) + 1);
 			}
 		}
-		
-		min_sup = 2;
-//		min_sup = (int) Math.ceil(min_sup_ratio * countTransaction);
-		
+
+		// min_sup = 2;
+		min_sup = (int) Math.ceil(min_sup_ratio * countTransaction);
+
 		int tmpItemCount;
 		LinkedList<ItemSup> frequentItemList = new LinkedList<ItemSup>();
 		for (int item : countItemFrequency.keySet()) {
@@ -119,7 +130,38 @@ public class FPGrowth {
 		}
 
 		HashSet<Integer> emptyItemSet = new HashSet<Integer>();
+
+		System.out.println("######################################################");
+		System.out.println("Sale DataBase has " + countTransaction + " transactions");
+		System.out.println("Given min_sup_ratio : " + min_sup_ratio + " , choose min_sup : " + min_sup);
+		System.out.println("######################################################");
+		System.out.println();
+
+		if (WRITE_TO_FILE) {
+			try {
+				dataOutputWriter = new PrintWriter(outputFilePath, "UTF-8");
+			} catch (FileNotFoundException | UnsupportedEncodingException e) {
+				System.out.println("output file error!");
+				System.exit(0);
+			}
+
+			dataOutputWriter.println("######################################################");
+			dataOutputWriter.println("Sale DataBase has " + countTransaction + " transactions");
+			dataOutputWriter.println("Given min_sup_ratio : " + min_sup_ratio + " , choose min_sup : " + min_sup);
+			dataOutputWriter.println("######################################################");
+		}
+
+		System.out.println("Start mining ...");
 		mining(frequentPattermTree, headerTable, emptyItemSet);
+
+		long stopTime = System.currentTimeMillis();
+
+		System.out.println(getSimpleResult(stopTime - startTime, false));
+
+		if (WRITE_TO_FILE) {
+			dataOutputWriter.println(getSimpleResult(stopTime - startTime, true));
+			dataOutputWriter.close();
+		}
 	}
 
 	public void mining(FrequentPatternTree FPTree, HeaderTable HTable, HashSet<Integer> ItemSet) {
@@ -163,7 +205,14 @@ public class FPGrowth {
 			}
 			expItemsetSup = new ItemsetSupport(expItemSet, Count);
 
-			System.out.println(expItemsetSup.toString());
+			if (SHOW_PATTERM) {
+				System.out.println(expItemsetSup.toString());
+			}
+
+			if (WRITE_TO_FILE) {
+				dataOutputWriter.println(expItemsetSup.toString());
+			}
+			// System.out.println(expItemsetSup.toString());
 			countFrequentPatterm += 1;
 
 			tmpFreqItemSet = new HashSet<Integer>();
@@ -234,21 +283,23 @@ public class FPGrowth {
 
 	}
 
-	public String getSimpleResult() {
+	public String getSimpleResult(long executeTime, boolean flagToFile) {
 		String result = new String();
-		if (COLORFUL) {
-			result += "========================================\n";
-			result += "FPGrowth Mining Result\n";
+		if (COLORFUL_DISPLAY && !flagToFile) {
+			result += ANSI_GREEN + "======================================================" + ANSI_RESET + "\n";
+			result += ANSI_GREEN + "FPGrowth" + ANSI_RESET +" Mining Result\n";
 			result += "Transaction size : " + countTransaction + " and  min_sup : " + ANSI_RED + min_sup_ratio + ANSI_RESET + "\n";
-			result += "There are " + ANSI_YELLOW + countFrequentPatterm + ANSI_RESET + " frequent itemsets !\n";
-			result += "========================================\n";
+			result += "There are " + ANSI_CYAN + countFrequentPatterm + ANSI_RESET + " frequent itemsets !\n";
+			result += "Execution Time : " + ANSI_CYAN + executeTime + ANSI_RESET + "(ms)\n";
+			result += ANSI_GREEN + "======================================================" + ANSI_RESET + "\n";
 
 		} else {
-			result += "========================================\n";
+			result += "======================================================\n";
 			result += "FPGrowth Mining Result\n";
 			result += "Transaction size : " + countTransaction + " and  min_sup : " + min_sup_ratio + "\n";
 			result += "There are " + countFrequentPatterm + " frequent itemsets !\n";
-			result += "========================================\n";
+			result += "Execution Time : " + executeTime + "(ms)\n";
+			result += "======================================================\n";
 		}
 		return result;
 	}
@@ -267,7 +318,7 @@ public class FPGrowth {
 			int tmpItem;
 			int tmpItemMapNum;
 			int initialListSize = someTransaction.size();
-			
+
 			for (int i = 0; i < initialListSize; i++) {
 				tmpItem = someTransaction.remove();
 				if (ptrCurrentNode.firstchild == null) {
@@ -308,7 +359,7 @@ public class FPGrowth {
 								headerTable.HTNodeArr[tmpItemMapNum].rearFPNode.nextFP = tmpNode;
 							headerTable.HTNodeArr[tmpItemMapNum].rearFPNode = tmpNode;
 
-							ptrCurrentNode = ptrCurrentNode.firstchild;
+							ptrCurrentNode = ptrSearchNode.next;
 						}
 					}
 				}

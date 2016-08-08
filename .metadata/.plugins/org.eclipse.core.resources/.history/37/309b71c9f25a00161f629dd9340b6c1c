@@ -1,0 +1,22 @@
+import java.awt.event.ItemEvent;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+
+public class test {
+
+	/**
+	 * @param args
+	 * @throws IOException 
+	 */
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		String current = new java.io.File(".").getCanonicalPath();
+		System.out.println("Current dir:" + current);
+		String currentDir = System.getProperty("user.dir");
+		System.out.println("Current dir using System:" + currentDir);
+
+	}
+
+}

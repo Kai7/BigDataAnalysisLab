@@ -9,10 +9,20 @@ public class SPMining {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String inDataPath = "/home/kai7/Documents/BDALab_testdata/C50S10T2.5N10000.ascii", outDataPath = "/home/kai7/Documents/BDALab_testdata/C50S10T2.5N10000_miningResult.txt"; 
+		String inDataPath = "/home/kaichi/Documents/BDALab/SequentialPatternMining/SPMiningDataSet/C50S10T2.5N10000.ascii"; 
 		
-		for(int i=1; i>=1; i--){
-			PrefixSpan PSMiner = new PrefixSpan(inDataPath,outDataPath, (double)i/1000);
+//		double minsup_ratio;
+//		for(int i=1; i>=1; i--){
+//			minsup_ratio = (double)i/1000;
+//			PrefixSpan PSMiner = new PrefixSpan(inDataPath,inDataPath +".Apriori.minsup-" + minsup_ratio + ".result", (double)i/1000);
+//			PSMiner.mining();
+//		}
+		
+		int[] minsups = {50, 100, 500, 1000};
+		int minsup;
+		for(int i=0; i< minsups.length; i++){
+			minsup = minsups[i];
+			PrefixSpan PSMiner = new PrefixSpan(inDataPath,inDataPath +".PrefixSpan.minsup-" + minsup + ".result", minsup);
 			PSMiner.mining();
 		}
 		
