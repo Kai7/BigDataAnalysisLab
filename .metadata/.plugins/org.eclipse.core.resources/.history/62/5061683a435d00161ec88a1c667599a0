@@ -1,0 +1,11 @@
+package KaiSeven;
+
+public class ClusteringRun {
+
+	public static void main(String[] args) {
+		String inDataPath = "";
+		
+		
+	}
+
+}

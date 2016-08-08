@@ -1,0 +1,26 @@
+package KaiSeven;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.LinkedList;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class DBSCAN {
+	public DBSCAN(String inDataPath, String outDataPath, double eps, int minpts) {
+		Scanner dataInput = null;
+		try {
+			dataInput = new Scanner(new FileInputStream(inDataPath));
+		} catch (FileNotFoundException e) {
+			System.out.println("input file error!");
+			System.exit(0);
+		}
+		
+		StringTokenizer handleLine;
+	}
+	
+	private class Point {
+		double x, y;
+		LinkedList<Point> neighborPoints;
+	}
+}

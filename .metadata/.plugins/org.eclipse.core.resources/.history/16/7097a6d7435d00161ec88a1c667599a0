@@ -1,0 +1,21 @@
+package KaiSeven;
+
+import java.io.IOException;
+
+public class ClusteringRun {
+
+	public static void main(String[] args) {
+		String inDataPath = "";
+		
+		String currentPath = "";
+		try {
+			currentPath = new java.io.File(".").getCanonicalPath();
+		} catch (IOException e) {
+			System.out.println("Error : Can't get current working directory !");
+			System.exit(0);
+		}
+		
+		inDataPath = currentPath + "/DataSet/clustering_test.txt";
+	}
+
+}
