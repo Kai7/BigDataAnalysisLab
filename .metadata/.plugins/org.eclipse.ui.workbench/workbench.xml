@@ -8,16 +8,16 @@
 </perspectiveBar>
 <coolbarLayout>
 <coolItem id="group.file" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="144" y="30"/>
+<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="150" y="36"/>
 <coolItem id="additions" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.debug.ui.launch.toolbar" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="156" y="30"/>
-<coolItem id="org.eclipse.debug.ui.main.toolbar" itemType="typeToolBarContribution" x="316" y="30"/>
-<coolItem id="org.eclipse.jdt.ui.JavaElementCreationActionSet" itemType="typeToolBarContribution" x="88" y="30"/>
-<coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="88" y="30"/>
-<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="124" y="30"/>
+<coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="162" y="36"/>
+<coolItem id="org.eclipse.debug.ui.main.toolbar" itemType="typeToolBarContribution" x="322" y="36"/>
+<coolItem id="org.eclipse.jdt.ui.JavaElementCreationActionSet" itemType="typeToolBarContribution" x="94" y="36"/>
+<coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="94" y="36"/>
+<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="130" y="36"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="232" y="30"/>
+<coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="238" y="36"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
@@ -30,39 +30,44 @@
 <info part="DefaultEditorWorkbook">
 <folder appearance="1" expanded="2">
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="5"/>
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
-<part id="0"/>
 <part id="4"/>
+<part id="0"/>
+<part id="5"/>
+<part id="6"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="test.java" partName="test.java" path="/home/kaichi/Programming/BigDataAnalysisLab/AssociationRuleMining/src/test.java" title="test.java" tooltip="AssociationRuleMining/src/test.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AssociationRuleMining/src/test.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="196" selectionOffset="182" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Apriori.java" partName="Apriori.java" path="/home/kaichi/Programming/BigDataAnalysisLab/AssociationRuleMining/src/KaiSeven/Apriori.java" title="Apriori.java" tooltip="AssociationRuleMining/src/KaiSeven/Apriori.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AssociationRuleMining/src/KaiSeven/Apriori.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="375" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="FPGrowth.java" partName="FPGrowth.java" path="/home/kaichi/Programming/BigDataAnalysisLab/AssociationRuleMining/src/KaiSeven/FPGrowth.java" title="FPGrowth.java" tooltip="AssociationRuleMining/src/KaiSeven/FPGrowth.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AssociationRuleMining/src/KaiSeven/FPGrowth.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="487" selectionTopPixel="1579"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PrefixSpan.java" partName="PrefixSpan.java" path="/home/kaichi/Programming/BigDataAnalysisLab/SequentialPatternMining/src/KaiSeven/PrefixSpan.java" title="PrefixSpan.java" tooltip="SequentialPatternMining/src/KaiSeven/PrefixSpan.java" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PrefixSpan.java" partName="PrefixSpan.java" path="/home/kai7/Program/BigDataAnalysisLab/SequentialPatternMining/src/KaiSeven/PrefixSpan.java" title="PrefixSpan.java" tooltip="SequentialPatternMining/src/KaiSeven/PrefixSpan.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SequentialPatternMining/src/KaiSeven/PrefixSpan.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="7698" selectionTopPixel="2589"/>
+<editorState selectionHorizontalPixel="0" selectionLength="28" selectionOffset="859" selectionTopPixel="0"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SPMining.java" partName="SPMining.java" path="/home/kaichi/Programming/BigDataAnalysisLab/SequentialPatternMining/src/KaiSeven/SPMining.java" title="SPMining.java" tooltip="SequentialPatternMining/src/KaiSeven/SPMining.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SequentialPatternMining/src/KaiSeven/SPMining.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="562" selectionTopPixel="0"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ClusteringRun.java" partName="ClusteringRun.java" path="/home/kai7/Program/BigDataAnalysisLab/Clustering/src/KaiSeven/ClusteringRun.java" title="ClusteringRun.java" tooltip="Clustering/src/KaiSeven/ClusteringRun.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Clustering/src/KaiSeven/ClusteringRun.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="540" selectionTopPixel="0"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ARMining.java" partName="ARMining.java" path="/home/kaichi/Programming/BigDataAnalysisLab/AssociationRuleMining/src/ARMining.java" title="ARMining.java" tooltip="AssociationRuleMining/src/ARMining.java" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="DBSCAN2d.java" partName="DBSCAN2d.java" path="/home/kai7/Program/BigDataAnalysisLab/Clustering/src/KaiSeven/DBSCAN2d.java" title="DBSCAN2d.java" tooltip="Clustering/src/KaiSeven/DBSCAN2d.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Clustering/src/KaiSeven/DBSCAN2d.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5163" selectionTopPixel="1930"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ARMining.java" partName="ARMining.java" path="/home/kai7/Program/BigDataAnalysisLab/AssociationRuleMining/src/ARMining.java" title="ARMining.java" tooltip="AssociationRuleMining/src/ARMining.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AssociationRuleMining/src/ARMining.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="57" selectionOffset="5636" selectionTopPixel="1933"/>
+<editorState selectionHorizontalPixel="0" selectionLength="45" selectionOffset="5648" selectionTopPixel="2068"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SPMining.java" partName="SPMining.java" path="/home/kai7/Program/BigDataAnalysisLab/SequentialPatternMining/src/KaiSeven/SPMining.java" title="SPMining.java" tooltip="SequentialPatternMining/src/KaiSeven/SPMining.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SequentialPatternMining/src/KaiSeven/SPMining.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="83" selectionOffset="1064" selectionTopPixel="13"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="test.java" partName="test.java" path="/home/kai7/Program/BigDataAnalysisLab/AssociationRuleMining/src/test.java" title="test.java" tooltip="AssociationRuleMining/src/test.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AssociationRuleMining/src/test.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="736" selectionTopPixel="0"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ClusteringDraw.java" partName="ClusteringDraw.java" path="/home/kai7/Program/BigDataAnalysisLab/Clustering/src/KaiSeven/ClusteringDraw.java" title="ClusteringDraw.java" tooltip="Clustering/src/KaiSeven/ClusteringDraw.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Clustering/src/KaiSeven/ClusteringDraw.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="163" selectionTopPixel="0"/>
 </editor>
 </editors>
 <views>
@@ -74,10 +79,6 @@
 </view>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
-<expanded>
-<category IMemento.internal.id="Warnings (23 items)"/>
-<category IMemento.internal.id="Errors"/>
-</expanded>
 <columnWidths org.eclipse.ui.ide.locationField="105" org.eclipse.ui.ide.markerType="913" org.eclipse.ui.ide.pathField="140" org.eclipse.ui.ide.resourceField="105" org.eclipse.ui.ide.severityAndDescriptionField="350"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
@@ -292,7 +293,7 @@
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.14248298" ratioLeft="272" ratioRight="1637" relationship="2" relative="left"/>
-<info folder="true" part="bottom" ratio="0.59956944" ratioLeft="557" ratioRight="372" relationship="4" relative="org.eclipse.ui.editorss">
+<info folder="true" part="bottom" ratio="0.6493644" ratioLeft="613" ratioRight="331" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.jdt.ui.JavadocView" label="Javadoc"/>
@@ -416,163 +417,163 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AssociationRuleMining/src/KaiSeven/FPGrowth.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AssociationRuleMining/src/KaiSeven/Apriori.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Clustering/src/KaiSeven/DBSCAN2d.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AssociationRuleMining/src/ARMining.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SequentialPatternMining/src/KaiSeven/PrefixSpan.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Clustering/src/KaiSeven/ClusteringRun.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SequentialPatternMining/src/KaiSeven/SPMining.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AssociationRuleMining/src/test.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AssociationRuleMining/src/KaiSeven/FPGrowth.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SequentialPatternMining/src/KaiSeven/PrefixSpan.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Clustering/src/KaiSeven/DBSCAN2d.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Clustering/src/KaiSeven/ClusteringDraw.java"/>
 </editors>
-<item historyLabel="Apriori.java" index="1">
-<position info="not_deleted" x="461" y="0"/>
+<item historyLabel="ARMining.java" index="1">
+<position info="not_deleted" x="5648" y="45"/>
 </item>
-<item historyLabel="FPGrowth.java" index="0">
-<position info="not_deleted" x="1485" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="0">
+<position info="not_deleted" x="480" y="22"/>
 </item>
-<item historyLabel="Apriori.java" index="1">
-<position info="not_deleted" x="7694" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="0">
+<position info="not_deleted" x="1654" y="0"/>
 </item>
-<item historyLabel="ARMining.java" index="2">
-<position info="not_deleted" x="5747" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="0">
+<position info="not_deleted" x="2178" y="0"/>
 </item>
-<item historyLabel="Apriori.java" index="1">
-<position info="not_deleted" x="7694" y="0"/>
+<item historyLabel="PrefixSpan.java" index="4">
+<position info="not_deleted" x="707" y="44"/>
 </item>
-<item historyLabel="FPGrowth.java" index="0">
-<position info="not_deleted" x="1485" y="0"/>
+<item historyLabel="SPMining.java" index="3">
+<position info="not_deleted" x="1064" y="83"/>
 </item>
-<item historyLabel="Apriori.java" index="1">
-<position info="not_deleted" x="1081" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="0">
+<position info="not_deleted" x="2178" y="0"/>
 </item>
-<item historyLabel="ARMining.java" index="2">
-<position info="not_deleted" x="2316" y="0"/>
+<item historyLabel="ClusteringRun.java" index="2">
+<position info="not_deleted" x="706" y="0"/>
 </item>
-<item historyLabel="Apriori.java" index="1">
-<position info="not_deleted" x="375" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="0">
+<position info="not_deleted" x="2178" y="0"/>
 </item>
-<item historyLabel="ARMining.java" index="2">
-<position info="not_deleted" x="1760" y="0"/>
+<item historyLabel="ARMining.java" index="1">
+<position info="not_deleted" x="5648" y="45"/>
 </item>
-<item historyLabel="Apriori.java" index="1">
-<position info="not_deleted" x="375" y="0"/>
+<item historyLabel="PrefixSpan.java" index="4">
+<position info="not_deleted" x="7929" y="215"/>
 </item>
-<item historyLabel="FPGrowth.java" index="0">
-<position info="not_deleted" x="583" y="490"/>
+<item historyLabel="ClusteringRun.java" index="2">
+<position info="not_deleted" x="706" y="0"/>
 </item>
-<item historyLabel="ARMining.java" index="2">
-<position info="not_deleted" x="3662" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="0">
+<position info="not_deleted" x="1744" y="0"/>
 </item>
-<item historyLabel="Apriori.java" index="1">
-<position info="not_deleted" x="6320" y="0"/>
+<item historyLabel="PrefixSpan.java" index="4">
+<position info="not_deleted" x="859" y="28"/>
 </item>
-<item historyLabel="FPGrowth.java" index="0">
-<position info="not_deleted" x="11170" y="0"/>
+<item historyLabel="ClusteringRun.java" index="2">
+<position info="not_deleted" x="172" y="0"/>
 </item>
-<item historyLabel="ARMining.java" index="2">
-<position info="not_deleted" x="3938" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="0">
+<position info="not_deleted" x="1744" y="0"/>
 </item>
-<item historyLabel="Apriori.java" index="1">
-<position info="not_deleted" x="6320" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="0">
+<position info="not_deleted" x="2002" y="0"/>
 </item>
-<item historyLabel="Apriori.java" index="1">
-<position info="not_deleted" x="5854" y="89"/>
+<item historyLabel="DBSCAN2d.java" index="0">
+<position info="not_deleted" x="2144" y="0"/>
 </item>
-<item historyLabel="FPGrowth.java" index="0">
-<position info="not_deleted" x="11170" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="0">
+<position info="not_deleted" x="2144" y="0"/>
 </item>
-<item historyLabel="Apriori.java" index="1">
-<position info="not_deleted" x="5854" y="89"/>
+<item historyLabel="DBSCAN2d.java" index="0">
+<position info="not_deleted" x="2098" y="0"/>
 </item>
-<item historyLabel="FPGrowth.java" index="0">
-<position info="not_deleted" x="10557" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="0">
+<position info="not_deleted" x="2027" y="0"/>
 </item>
-<item historyLabel="Apriori.java" index="1">
-<position info="not_deleted" x="6174" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="0">
+<position info="not_deleted" x="2055" y="16"/>
 </item>
-<item historyLabel="FPGrowth.java" index="0">
-<position info="not_deleted" x="10557" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="0">
+<position info="not_deleted" x="2142" y="0"/>
 </item>
-<item historyLabel="ARMining.java" index="2">
-<position info="not_deleted" x="3938" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="0">
+<position info="not_deleted" x="2178" y="0"/>
 </item>
-<item historyLabel="Apriori.java" index="1">
-<position info="not_deleted" x="5996" y="0"/>
+<item historyLabel="ClusteringRun.java" index="2">
+<position info="not_deleted" x="172" y="0"/>
 </item>
-<item historyLabel="FPGrowth.java" index="0">
-<position info="not_deleted" x="4825" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="0">
+<position info="not_deleted" x="2746" y="0"/>
 </item>
-<item historyLabel="Apriori.java" index="1">
-<position info="not_deleted" x="3328" y="0"/>
+<item historyLabel="ClusteringRun.java" index="2">
+<position info="not_deleted" x="172" y="0"/>
 </item>
-<item historyLabel="ARMining.java" index="2">
-<position info="not_deleted" x="188" y="0"/>
+<item historyLabel="PrefixSpan.java" index="4">
+<position info="not_deleted" x="859" y="28"/>
 </item>
-<item historyLabel="Apriori.java" index="1">
-<position info="not_deleted" x="375" y="0"/>
+<item historyLabel="ClusteringRun.java" index="2">
+<position info="not_deleted" x="172" y="0"/>
 </item>
-<item historyLabel="FPGrowth.java" index="0">
-<position info="not_deleted" x="487" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="0">
+<position info="not_deleted" x="2539" y="0"/>
 </item>
-<item historyLabel="ARMining.java" index="2">
-<position info="not_deleted" x="188" y="0"/>
+<item historyLabel="ClusteringRun.java" index="2">
+<position info="not_deleted" x="709" y="0"/>
 </item>
-<item historyLabel="PrefixSpan.java" index="3">
-<position info="not_deleted" x="4453" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="0">
+<position info="not_deleted" x="1260" y="0"/>
 </item>
-<item historyLabel="SPMining.java" index="4">
-<position info="not_deleted" x="340" y="0"/>
+<item historyLabel="ClusteringRun.java" index="2">
+<position info="not_deleted" x="709" y="0"/>
 </item>
-<item historyLabel="test.java" index="5">
-<position info="not_deleted" x="182" y="196"/>
+<item historyLabel="DBSCAN2d.java" index="0">
+<position info="not_deleted" x="1656" y="0"/>
 </item>
-<item historyLabel="PrefixSpan.java" index="3">
-<position info="not_deleted" x="4453" y="0"/>
+<item historyLabel="ClusteringRun.java" index="2">
+<position info="not_deleted" x="709" y="0"/>
 </item>
-<item historyLabel="SPMining.java" index="4">
-<position info="not_deleted" x="296" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="5">
+<position info="not_deleted" x="1646" y="0"/>
 </item>
-<item historyLabel="ARMining.java" index="2">
-<position info="not_deleted" x="5636" y="57"/>
+<item historyLabel="ClusteringRun.java" index="2">
+<position info="not_deleted" x="541" y="0"/>
 </item>
-<item historyLabel="PrefixSpan.java" index="3">
-<position info="not_deleted" x="4453" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="5">
+<position info="not_deleted" x="1619" y="0"/>
 </item>
-<item historyLabel="FPGrowth.java" index="6">
-<position info="not_deleted" x="487" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="5">
+<position/>
 </item>
-<item historyLabel="SPMining.java" index="4">
-<position info="not_deleted" x="340" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="5">
+<position/>
 </item>
-<item historyLabel="test.java" index="5">
-<position info="not_deleted" x="182" y="196"/>
+<item historyLabel="DBSCAN2d.java" index="5">
+<position/>
 </item>
-<item historyLabel="SPMining.java" index="4">
-<position info="not_deleted" x="340" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="5">
+<position info="not_deleted" x="3726" y="0"/>
 </item>
-<item historyLabel="SPMining.java" index="4">
-<position info="not_deleted" x="572" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="5">
+<position info="not_deleted" x="3842" y="0"/>
 </item>
-<item historyLabel="SPMining.java" index="4">
-<position info="not_deleted" x="683" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="5">
+<position info="not_deleted" x="3691" y="0"/>
 </item>
-<item historyLabel="PrefixSpan.java" index="3">
-<position info="not_deleted" x="7698" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="5">
+<position info="not_deleted" x="3921" y="0"/>
 </item>
-<item historyLabel="FPGrowth.java" index="6">
-<position info="not_deleted" x="487" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="5">
+<position info="not_deleted" x="3710" y="0"/>
 </item>
-<item historyLabel="PrefixSpan.java" index="3">
-<position info="not_deleted" x="7698" y="0"/>
+<item historyLabel="ClusteringRun.java" index="2">
+<position info="not_deleted" x="505" y="0"/>
 </item>
-<item historyLabel="FPGrowth.java" index="6">
-<position info="not_deleted" x="487" y="0"/>
+<item historyLabel="DBSCAN2d.java" index="5">
+<position info="not_deleted" x="5163" y="0"/>
 </item>
-<item historyLabel="PrefixSpan.java" index="3">
-<position info="not_deleted" x="7698" y="0"/>
+<item historyLabel="ClusteringRun.java" index="2">
+<position info="not_deleted" x="540" y="0"/>
 </item>
-<item active="true" historyLabel="SPMining.java" index="4">
-<position info="not_deleted" x="683" y="0"/>
+<item active="true" historyLabel="ClusteringDraw.java" index="6">
+<position info="not_deleted" x="0" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -591,20 +592,32 @@
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ARMining.java" tooltip="AssociationRuleMining/src/ARMining.java">
-<persistable path="/AssociationRuleMining/src/ARMining.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ClusteringDraw.java" tooltip="Clustering/src/KaiSeven/ClusteringDraw.java">
+<persistable path="/Clustering/src/KaiSeven/ClusteringDraw.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="test.java" tooltip="AssociationRuleMining/src/test.java">
+<persistable path="/AssociationRuleMining/src/test.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AprioriAll.java" tooltip="SequentialPatternMining/src/KaiSeven/AprioriAll.java">
+<persistable path="/SequentialPatternMining/src/KaiSeven/AprioriAll.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SPMining.java" tooltip="SequentialPatternMining/src/KaiSeven/SPMining.java">
 <persistable path="/SequentialPatternMining/src/KaiSeven/SPMining.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ARMining.java" tooltip="AssociationRuleMining/src/ARMining.java">
+<persistable path="/AssociationRuleMining/src/ARMining.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="DBSCAN.java" tooltip="Clustering/src/KaiSeven/DBSCAN.java">
+<persistable path="/Clustering/src/KaiSeven/DBSCAN.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ClusteringRun.java" tooltip="Clustering/src/KaiSeven/ClusteringRun.java">
+<persistable path="/Clustering/src/KaiSeven/ClusteringRun.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PrefixSpan.java" tooltip="SequentialPatternMining/src/KaiSeven/PrefixSpan.java">
 <persistable path="/SequentialPatternMining/src/KaiSeven/PrefixSpan.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="FPGrowth.java" tooltip="AssociationRuleMining/src/KaiSeven/FPGrowth.java">
 <persistable path="/AssociationRuleMining/src/KaiSeven/FPGrowth.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AprioriAll.java" tooltip="SequentialPatternMining/src/KaiSeven/AprioriAll.java">
-<persistable path="/SequentialPatternMining/src/KaiSeven/AprioriAll.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="FPGrowthAlpha.java" tooltip="AssociationRuleMining/src/FPGrowthAlpha.java">
 <persistable path="/AssociationRuleMining/src/FPGrowthAlpha.java"/>
@@ -614,9 +627,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Apriori.java" tooltip="AssociationRuleMining/src/KaiSeven/Apriori.java">
 <persistable path="/AssociationRuleMining/src/KaiSeven/Apriori.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="test.java" tooltip="AssociationRuleMining/src/test.java">
-<persistable path="/AssociationRuleMining/src/test.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AprioriAlgo.java" tooltip="AssociationRuleMining/src/AprioriAlgo.java">
 <persistable path="/AssociationRuleMining/src/AprioriAlgo.java"/>

@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 public class DBSCAN2d {
 	private static boolean WRITE_TO_FILE = true;
-	
+
 	double Eps;
 	int minPts;
 	Graph2d graph2d;
@@ -53,12 +53,12 @@ public class DBSCAN2d {
 
 			tmpPoint2dList.add(tmpPoint2d);
 		}
-		
+
 		graph2d = new Graph2d(tmpPoint2dList);
-		
+
 		graph2d.cluster();
-		
-		if(WRITE_TO_FILE){
+
+		if (WRITE_TO_FILE) {
 			PrintWriter dataOutputWriter = null;
 			try {
 				dataOutputWriter = new PrintWriter(outDataPath, "UTF-8");
@@ -66,7 +66,7 @@ public class DBSCAN2d {
 				System.out.println("output file error!");
 				System.exit(0);
 			}
-			for(int i=0;i<graph2d.point2ds.length; i++){
+			for (int i = 0; i < graph2d.point2ds.length; i++) {
 				Point2d ptrPoint2d = graph2d.point2ds[i];
 				dataOutputWriter.println(ptrPoint2d.x + "\t" + ptrPoint2d.y + "\t" + ptrPoint2d.cluster);
 			}
@@ -97,6 +97,7 @@ public class DBSCAN2d {
 					countNonNoise += 1;
 				} else
 					tmpNonCorePointIndexList.add(i);
+
 			}
 
 			while (tmpNonCorePointIndexList.size() > 0) {
@@ -113,6 +114,18 @@ public class DBSCAN2d {
 				if (point2ds[index].flagClass == 'u')
 					point2ds[index].flagClass = 'n';
 			}
+
+//			for (int i = 0; i < point2ds.length; i++) {
+//				System.out.println("(" + point2ds[i].x + "," + point2ds[i].y + "):" + point2ds[i].flagClass);
+//				Iterator<Point2d> ptrTmpPoint2dList = point2ds[i].neighborPoints.listIterator();
+//				while (ptrTmpPoint2dList.hasNext()) {
+//					Point2d ptrTmpPoint2d = ptrTmpPoint2dList.next();
+//					System.out.print("(" + ptrTmpPoint2d.x + "," + ptrTmpPoint2d.y + ") , ");
+//				}
+//				System.out.println();
+//				System.out.println("--------------------");
+//			}
+
 		}
 
 		private void cluster() {
@@ -126,7 +139,7 @@ public class DBSCAN2d {
 				point2ds[i].cluster = countCluster;
 				point2ds[i].flagVisit = true;
 				LinkedList<Point2d> visitList = new LinkedList<Point2d>();
-				if(point2ds[i].flagClass == 'c'){
+				if (point2ds[i].flagClass == 'c') {
 					visitList.add(point2ds[i]);
 					while (visitList.size() > 0) {
 						Point2d tmpPoint2d = visitList.remove();
@@ -138,20 +151,22 @@ public class DBSCAN2d {
 								continue;
 							visitPoint2d.cluster = countCluster;
 							visitPoint2d.flagVisit = true;
-							if(visitPoint2d.flagClass == 'c')
+							if (visitPoint2d.flagClass == 'c')
 								visitList.add(visitPoint2d);
 						}
 					}
-				}else{
+				} else {
 					Iterator<Point2d> tmpPoint2dIterator = point2ds[i].neighborPoints.listIterator();
 					while (tmpPoint2dIterator.hasNext()) {
 						Point2d visitPoint2d = tmpPoint2dIterator.next();
-						if(visitPoint2d.flagClass == 'c'){
-							visitList.add (visitPoint2d);
+						if (visitPoint2d.flagClass == 'c') {
+							visitPoint2d.cluster = countCluster;
+							visitPoint2d.flagVisit = true;
+							visitList.add(visitPoint2d);
 							break;
 						}
 					}
-					if(visitList.size() == 0){
+					if (visitList.size() == 0) {
 						System.out.println("Error: visitList.size() == 0");
 						System.exit(0);
 					}
@@ -165,7 +180,7 @@ public class DBSCAN2d {
 								continue;
 							visitPoint2d.cluster = countCluster;
 							visitPoint2d.flagVisit = true;
-							if(visitPoint2d.flagClass == 'c')
+							if (visitPoint2d.flagClass == 'c')
 								visitList.add(visitPoint2d);
 						}
 					}

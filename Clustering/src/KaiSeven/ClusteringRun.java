@@ -17,11 +17,13 @@ public class ClusteringRun {
 		}
 
 		inDataPath = currentPath + "/DataSet/clustering_test.txt";
+//		inDataPath = currentPath + "/DataSet/Simple.txt";
 
-		double eps = 3.0;
-		int minpts = 8;
+		double eps = 3;
+		int minpts = 15;
 
-		DBSCANCluster = new DBSCAN2d(inDataPath, inDataPath + ".DBSCAN.eps-" + eps + ".minpts-" + minpts + ".result", eps, minpts);
+//		DBSCANCluster = new DBSCAN2d(inDataPath, inDataPath + ".DBSCAN.eps-" + eps + ".minpts-" + minpts + ".result", eps, minpts);
+		DBSCANCluster = new DBSCAN2d(inDataPath, inDataPath + ".DBSCAN.result", eps, minpts);
 		
 		System.out.println("------------------------------------------------------\ndone");
 	}
