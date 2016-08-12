@@ -1,2 +1,7 @@
 1470627237735	Rename compilation unit 'DBSCAN.java'
 1470628060085	Rename type 'DBSCAN2D'
+1471008829301	Delete element
+1471009890688	Rename type 'Graph'
+1471009909936	Rename type 'Point'
+1471010000640	Rename type 'DBSCANGraph'
+1471010015873	Rename type 'DBSCANPoint'

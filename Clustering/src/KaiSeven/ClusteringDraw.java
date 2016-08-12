@@ -134,12 +134,19 @@ public class ClusteringDraw extends ApplicationFrame {
 			System.exit(0);
 		}
 
-		inDataPath = currentPath + "/DataSet/clustering_test.txt.DBSCAN.result";
+		inDataPath = currentPath + "/DataSet/clustering_test.txt.NewDBSCAN.result";
 
 		ClusteringDraw demo = new ClusteringDraw("Clustering Result", inDataPath);
 		demo.pack();
 		RefineryUtilities.centerFrameOnScreen(demo);
 		demo.setVisible(true);
+		
+		inDataPath = currentPath + "/DataSet/clustering_test.txt.DBSCAN.result";
+
+		ClusteringDraw demo2 = new ClusteringDraw("Clustering Result", inDataPath);
+		demo2.pack();
+		RefineryUtilities.centerFrameOnScreen(demo2);
+		demo2.setVisible(true);
 	}
 
 	private static class Point2d {
