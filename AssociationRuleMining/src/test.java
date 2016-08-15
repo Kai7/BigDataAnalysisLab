@@ -28,10 +28,23 @@ public class test {
 //				System.out.println(i+":false");
 //		}
 		
-		int[] tmpI = new int[100];
-		for(int i=0; i<tmpI.length; i++){
-			System.out.println(i);
+//		int[] tmpI = new int[100];
+//		for(int i=0; i<tmpI.length; i++){
+//			System.out.println(i);
+//		}
+//		String inputTestString = "[1.1,1.2][2.1,2.2][3.1,3.2]\n[4.1,4.2][5.1,5.2]";
+		String inputTestString = "[1.1,1.2][2.1,2.2][3.1,3.2]";
+//		String splitString[] = inputTestString.split("\\[|\\]");
+		String splitString[] = inputTestString.split("\\[");
+		for(int i=0;i<splitString.length;i++){
+			System.out.print("i="+i +":");
+			if(splitString[i]==""){
+				System.out.println("null");
+				continue;
+			}
+			System.out.println(splitString[i]);
 		}
+		
 	}
 
 }

@@ -1,0 +1,6 @@
+package KaiSeven;
+
+public class DBSCANGraph {
+	public DBSCANPoint[] points;
+	
+}

@@ -1,0 +1,16 @@
+package Pattern;
+
+public class DataVector {
+	public double[] data;
+	
+	public DataVector(double[] data) {
+		this.data = data;
+	}
+	
+	public String toString(){
+		if(data.length == 0){
+			return "";
+		}
+		StringBuilder buffer = new StringBuilder();
+	}
+}

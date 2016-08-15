@@ -1,0 +1,23 @@
+package KaiSeven;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class RewriteOutputData {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner inputScanner = null;
+		String inDataPath = "/home/kai7/Program/BigDataAnalysisLab/Clustering/DataSet/clustering_test.txt.rewrite.result";
+		try{
+			inputScanner = new Scanner(new FileInputStream(inDataPath));
+		}catch(IOException e){
+			
+		}
+	}
+
+}

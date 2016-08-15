@@ -1,0 +1,9 @@
+package Pattern;
+
+public class DataVector {
+	public double[] data;
+	
+	public DataVector(double[] data) {
+		this.data = data;
+	}
+}

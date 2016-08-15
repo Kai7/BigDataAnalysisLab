@@ -134,12 +134,24 @@ public class ClusteringDraw extends ApplicationFrame {
 			System.exit(0);
 		}
 
+//		inDataPath = currentPath + "/DataSet/clustering_test.txt.NewDBSCAN.result";
+//		ClusteringDraw demo = new ClusteringDraw("Clustering Result", inDataPath);
+//		demo.pack();
+//		RefineryUtilities.centerFrameOnScreen(demo);
+//		demo.setVisible(true);
+//		
 		inDataPath = currentPath + "/DataSet/clustering_test.txt.DBSCAN.result";
-
-		ClusteringDraw demo = new ClusteringDraw("Clustering Result", inDataPath);
-		demo.pack();
-		RefineryUtilities.centerFrameOnScreen(demo);
-		demo.setVisible(true);
+		ClusteringDraw demo2 = new ClusteringDraw("Clustering Result", inDataPath);
+		demo2.pack();
+		RefineryUtilities.centerFrameOnScreen(demo2);
+		demo2.setVisible(true);
+		
+		inDataPath = currentPath + "/DataSet/clustering_test.txt.rewrite.result.rewrite";
+		ClusteringDraw demo3 = new ClusteringDraw("Clustering Result", inDataPath);
+		demo3.pack();
+		RefineryUtilities.centerFrameOnScreen(demo3);
+		demo3.setVisible(true);
+		
 	}
 
 	private static class Point2d {

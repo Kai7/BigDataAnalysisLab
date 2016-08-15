@@ -1,0 +1,15 @@
+package DataStructure.KDTree;
+
+import Pattern.DataVector;
+
+public class KDNode {
+	DataVector vector;
+	int splitD;
+	KDNode left;
+	KDNode right;
+	
+	public KDNode() {
+		// TODO Auto-generated constructor stub
+	}
+	
+}

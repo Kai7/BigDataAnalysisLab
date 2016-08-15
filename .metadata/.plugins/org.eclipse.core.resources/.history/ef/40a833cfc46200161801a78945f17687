@@ -1,0 +1,11 @@
+package DataStructure.KDTree;
+
+public class KDTree {
+	private int countNode = 0;
+	private KDNode root = null;
+	private int countDimension = 0;
+	
+	public KDTree(){
+		
+	}
+}

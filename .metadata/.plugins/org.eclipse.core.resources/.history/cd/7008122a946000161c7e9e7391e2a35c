@@ -1,0 +1,26 @@
+package KaiSeven;
+
+import java.util.HashSet;
+
+public class DBSCANPoint {
+	public double x;
+	public double y;
+	public boolean flagVisit = false;
+	public HashSet<Point> neighborPoints;
+	
+	public DBSCANPoint(){
+		x = 0.0;
+		y = 0.0;
+		neighborPoints = new HashSet<Point>();
+	}
+	
+	public DBSCANPoint(double xx, double yy){
+		x = xx;
+		y = yy;
+		neighborPoints = new HashSet<Point>();
+	}
+	
+	public void addNeighbor(Point otherPoint){
+		neighborPoints.add(otherPoint);
+	}
+}

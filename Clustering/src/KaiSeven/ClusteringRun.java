@@ -29,7 +29,8 @@ public class ClusteringRun  extends ApplicationFrame{
 	
 	public static void main(String[] args)  {
 		DBSCAN2d DBSCANCluster;
-		
+		DBSCAN dbscan;
+
 		String inDataPath = "";
 
 		String currentPath = "";
@@ -43,11 +44,14 @@ public class ClusteringRun  extends ApplicationFrame{
 		inDataPath = currentPath + "/DataSet/clustering_test.txt";
 //		inDataPath = currentPath + "/DataSet/Simple.txt";
 
+
 		double eps = 3;
 		int minpts = 14;
 
+
 //		DBSCANCluster = new DBSCAN2d(inDataPath, inDataPath + ".DBSCAN.eps-" + eps + ".minpts-" + minpts + ".result", eps, minpts);
 		DBSCANCluster = new DBSCAN2d(inDataPath, inDataPath + ".DBSCAN.result", eps, minpts);
+		dbscan = new DBSCAN(inDataPath, inDataPath + ".NewDBSCAN.result", eps, minpts);
 		
 		
 		Point2d[] points = new Point2d[DBSCANCluster.graph2d.point2ds.length];
