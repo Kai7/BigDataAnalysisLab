@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.io.FileInputStream"/>
-<fullyQualifiedTypeName name="java.io.FileNotFoundException"/>
-<fullyQualifiedTypeName name="java.util.Set"/>
-<fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="FPGrowthAlgo"/>
-<fullyQualifiedTypeName name="FPGrowthAlgo.FPItem"/>
 <fullyQualifiedTypeName name="AprioriAlgo"/>
 <fullyQualifiedTypeName name="AprioriAlgo.AprioriTableItem"/>
 <fullyQualifiedTypeName name="AprioriAlgo.tt"/>
@@ -33,31 +27,37 @@
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.lang.reflect.Array"/>
 <fullyQualifiedTypeName name="java.util.Arrays"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
-<fullyQualifiedTypeName name="java.util.HashSet"/>
 <fullyQualifiedTypeName name="java.util.Collections"/>
 <fullyQualifiedTypeName name="KaiSeven.FPGrowth.HeaderTable"/>
 <fullyQualifiedTypeName name="KaiSeven.FPGrowth.ItemSup"/>
 <fullyQualifiedTypeName name="KaiSeven.FPGrowth.HTNode"/>
-<fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="KaiSeven.FPGrowth.FPNode"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
-<fullyQualifiedTypeName name="java.util.Scanner"/>
 <fullyQualifiedTypeName name="java.io.InputStreamReader"/>
 <fullyQualifiedTypeName name="java.io.BufferedReader"/>
 <fullyQualifiedTypeName name="KaiSeven.Apriori"/>
 <fullyQualifiedTypeName name="KaiSeven.DBSCAN2D.Graph2D"/>
 <fullyQualifiedTypeName name="KaiSeven.DBSCAN2D.Point2D"/>
-<fullyQualifiedTypeName name="java.util.StringTokenizer"/>
 <fullyQualifiedTypeName name="java.lang.Double"/>
 <fullyQualifiedTypeName name="KaiSeven.DBSCAN2D.Point2d"/>
-<fullyQualifiedTypeName name="java.lang.Math"/>
 <fullyQualifiedTypeName name="java.util.Iterator"/>
 <fullyQualifiedTypeName name="javax.swing.JPanel"/>
 <fullyQualifiedTypeName name="KaiSeven.ClusteringRun"/>
 <fullyQualifiedTypeName name="java.util.LinkedList"/>
 <fullyQualifiedTypeName name="KaiSeven.DBSCAN2d.Graph2d"/>
-<fullyQualifiedTypeName name="KaiSeven.DBSCAN2d"/>
 <fullyQualifiedTypeName name="KaiSeven.DBSCAN2d.Point2d"/>
+<fullyQualifiedTypeName name="KaiSeven.ClusteringDraw.Point2dNode"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.util.HashSet"/>
+<fullyQualifiedTypeName name="KaiSeven.ClusteringDraw"/>
+<fullyQualifiedTypeName name="KaiSeven.ClusteringDraw.Point2d"/>
+<fullyQualifiedTypeName name="KaiSeven.ClusteringRun.Point2d"/>
+<fullyQualifiedTypeName name="java.util.Scanner"/>
+<fullyQualifiedTypeName name="java.io.FileInputStream"/>
+<fullyQualifiedTypeName name="java.util.StringTokenizer"/>
+<fullyQualifiedTypeName name="java.io.PrintWriter"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="java.lang.Math"/>
+<fullyQualifiedTypeName name="KaiSeven.DBSCAN2d"/>
 </qualifiedTypeNameHistroy>

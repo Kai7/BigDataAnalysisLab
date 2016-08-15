@@ -440,3 +440,23 @@ org.eclipse.core.commands.ExecutionException: No activeWorkbenchWindow found whi
 
 !ENTRY org.eclipse.ui.browser 2 0 2016-08-10 22:19:11.865
 !MESSAGE Internal browser is not available: No more handles [Unknown Mozilla path (MOZILLA_FIVE_HOME not set)]
+!SESSION 2016-08-11 14:07:22.861 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.8.0_101
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.ui.browser 2 0 2016-08-11 14:08:22.722
+!MESSAGE Internal browser is not available: No more handles [Unknown Mozilla path (MOZILLA_FIVE_HOME not set)]
+!SESSION 2016-08-15 11:26:27.315 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.7.0_111
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.ui.ide 4 4 2016-08-15 11:30:38.108
+!MESSAGE Problems occurred refreshing the selected resources.
+!SUBENTRY 1 org.eclipse.core.resources 4 567 2016-08-15 11:30:38.108
+!MESSAGE The project description file (.project) for 'spmf' is missing.  This file contains important information about the project.  The project will not function properly until this file is restored.

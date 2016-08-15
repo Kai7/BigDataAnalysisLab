@@ -1,0 +1,30 @@
+package KaiSeven;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class RewriteInputData {
+
+	public static void main(String[] args) {
+		Scanner inputScanner = null;
+		String inDataPath = "";
+		try{
+			inputScanner = new Scanner(new FileInputStream(inDataPath));
+		}catch (IOException e) {
+			System.out.println("Error : Can't get current working directory !");
+			System.exit(0);
+		}
+		PrintWriter outputPrinteWriter = null;
+		String outDataPath = "";
+		
+		StringTokenizer tokenizer;
+		while(inputScanner.hasNext()){
+			tokenizer = new StringTokenizer(inputScanner.nextLine());
+			
+		}
+	}
+
+}
