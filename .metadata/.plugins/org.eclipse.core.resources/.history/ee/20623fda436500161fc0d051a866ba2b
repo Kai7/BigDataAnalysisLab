@@ -135,13 +135,15 @@ public class KDTree {
 				continue;
 			}
 			if (targetPoint.data[d] <= traceKDNode.vector.data[d]) {
-				if (traceKDNode.right != null) {
-					traceBackKDNodes.push(traceKDNode.right);
+				if (traceKDNode.right == null) {
+					continue;
 				}
+				traceBackKDNodes.push(traceKDNode.right);
 			} else {
-				if (traceKDNode.left != null) {
-					traceBackKDNodes.push(traceKDNode.left);
+				if(traceKDNode.left == null){
+					continue;
 				}
+				traceBackKDNodes.push(traceKDNode.left);
 			}
 		}
 

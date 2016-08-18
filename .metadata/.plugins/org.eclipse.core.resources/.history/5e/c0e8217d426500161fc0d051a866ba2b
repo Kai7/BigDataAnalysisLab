@@ -117,34 +117,31 @@ public class KDTree {
 				ptrSearchKDNode = ptrSearchKDNode.right;
 			}
 		}
-
+		
 		DataVector nearestPoint = traceBackKDNodes.lastElement().vector;
 		double minDistance = disCalculator.calculateDistance(targetPoint, nearestPoint);
-
-		while (!traceBackKDNodes.isEmpty()) {
+		
+		while(!traceBackKDNodes.isEmpty()){
 			KDNode traceKDNode = traceBackKDNodes.pop();
 			double tmpDistance = disCalculator.calculateDistance(targetPoint, traceKDNode.vector);
-			if (tmpDistance < minDistance) {
+			if(tmpDistance < minDistance){
 				nearestPoint = traceKDNode.vector;
 				minDistance = tmpDistance;
 			}
-
+			
 			int d = traceKDNode.splitD;
 			double verticalDistance = Math.abs(targetPoint.data[d] - traceKDNode.vector.data[d]);
-			if (verticalDistance >= minDistance) {
-				continue;
-			}
-			if (targetPoint.data[d] <= traceKDNode.vector.data[d]) {
-				if (traceKDNode.right != null) {
-					traceBackKDNodes.push(traceKDNode.right);
+			
+			if(targetPoint.data[d]<= traceKDNode.vector.data[d]){
+				if(traceKDNode.right == null){
+					continue;
 				}
-			} else {
-				if (traceKDNode.left != null) {
-					traceBackKDNodes.push(traceKDNode.left);
-				}
+				
+			}else{
+				
 			}
 		}
-
-		return nearestPoint;
+		
+		return null;
 	}
 }

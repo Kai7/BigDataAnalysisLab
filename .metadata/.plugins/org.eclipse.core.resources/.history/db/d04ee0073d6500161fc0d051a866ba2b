@@ -2,7 +2,6 @@ package dataStructure.kdTree;
 
 import java.util.List;
 import java.util.Random;
-import java.util.Stack;
 
 import dataPattern.DataVector;
 
@@ -64,7 +63,7 @@ public class KDTree {
 			if (start == end) {
 				return dataVectors.get(start);
 			}
-
+			
 			int r = randomizePartition(dataVectors, start, end, currentD) - start + 1;
 
 			if (r == rank) {
@@ -85,7 +84,7 @@ public class KDTree {
 		DataVector pivotDataVector = dataVectors.get(end);
 		int f = start - 1;
 		for (int r = f + 1; r < end - 1; r++) {
-			if (dataVectors.get(r).getValueOf(currentD) <= pivotDataVector.getValueOf(currentD)) {
+			if (dataVectors.get(r).getValueOf(currentD) < pivotDataVector.getValueOf(currentD)) {
 				f++;
 				swap(dataVectors, f, r);
 			}
@@ -100,51 +99,5 @@ public class KDTree {
 		DataVector tmpDataVector = dataVectors.get(ii);
 		dataVectors.set(ii, dataVectors.get(jj));
 		dataVectors.set(jj, tmpDataVector);
-	}
-
-	public DataVector getNearest(DataVector targetPoint) {
-		if (root == null) {
-			return null;
-		}
-		Stack<KDNode> traceBackKDNodes = new Stack<KDNode>();
-		KDNode ptrSearchKDNode = root;
-		while (ptrSearchKDNode != null) {
-			traceBackKDNodes.push(ptrSearchKDNode);
-			int d = ptrSearchKDNode.splitD;
-			if (targetPoint.data[d] <= ptrSearchKDNode.vector.data[d]) {
-				ptrSearchKDNode = ptrSearchKDNode.left;
-			} else {
-				ptrSearchKDNode = ptrSearchKDNode.right;
-			}
-		}
-
-		DataVector nearestPoint = traceBackKDNodes.lastElement().vector;
-		double minDistance = disCalculator.calculateDistance(targetPoint, nearestPoint);
-
-		while (!traceBackKDNodes.isEmpty()) {
-			KDNode traceKDNode = traceBackKDNodes.pop();
-			double tmpDistance = disCalculator.calculateDistance(targetPoint, traceKDNode.vector);
-			if (tmpDistance < minDistance) {
-				nearestPoint = traceKDNode.vector;
-				minDistance = tmpDistance;
-			}
-
-			int d = traceKDNode.splitD;
-			double verticalDistance = Math.abs(targetPoint.data[d] - traceKDNode.vector.data[d]);
-			if (verticalDistance >= minDistance) {
-				continue;
-			}
-			if (targetPoint.data[d] <= traceKDNode.vector.data[d]) {
-				if (traceKDNode.right != null) {
-					traceBackKDNodes.push(traceKDNode.right);
-				}
-			} else {
-				if (traceKDNode.left != null) {
-					traceBackKDNodes.push(traceKDNode.left);
-				}
-			}
-		}
-
-		return nearestPoint;
 	}
 }

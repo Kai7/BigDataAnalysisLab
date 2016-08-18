@@ -131,20 +131,19 @@ public class KDTree {
 
 			int d = traceKDNode.splitD;
 			double verticalDistance = Math.abs(targetPoint.data[d] - traceKDNode.vector.data[d]);
-			if (verticalDistance >= minDistance) {
+			if (verticalDistance > minDistance) {
 				continue;
 			}
 			if (targetPoint.data[d] <= traceKDNode.vector.data[d]) {
-				if (traceKDNode.right != null) {
-					traceBackKDNodes.push(traceKDNode.right);
+				if (traceKDNode.right == null) {
+					continue;
 				}
+
 			} else {
-				if (traceKDNode.left != null) {
-					traceBackKDNodes.push(traceKDNode.left);
-				}
+
 			}
 		}
 
-		return nearestPoint;
+		return null;
 	}
 }

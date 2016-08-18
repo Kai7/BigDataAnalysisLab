@@ -102,49 +102,23 @@ public class KDTree {
 		dataVectors.set(jj, tmpDataVector);
 	}
 
-	public DataVector getNearest(DataVector targetPoint) {
-		if (root == null) {
+	public DataVector getNearest(DataVector targetPoint){
+		if(root == null){
 			return null;
 		}
-		Stack<KDNode> traceBackKDNodes = new Stack<KDNode>();
+		Stack<KDNode> traceBack = new Stack<KDNode>();
 		KDNode ptrSearchKDNode = root;
-		while (ptrSearchKDNode != null) {
-			traceBackKDNodes.push(ptrSearchKDNode);
+		while(ptrSearchKDNode != null){
+			traceBack.push(ptrSearchKDNode);
 			int d = ptrSearchKDNode.splitD;
-			if (targetPoint.data[d] <= ptrSearchKDNode.vector.data[d]) {
+			if(targetPoint.data[d]<=ptrSearchKDNode.vector.data[d]){
 				ptrSearchKDNode = ptrSearchKDNode.left;
-			} else {
+			}
+			else{
 				ptrSearchKDNode = ptrSearchKDNode.right;
 			}
 		}
-
-		DataVector nearestPoint = traceBackKDNodes.lastElement().vector;
-		double minDistance = disCalculator.calculateDistance(targetPoint, nearestPoint);
-
-		while (!traceBackKDNodes.isEmpty()) {
-			KDNode traceKDNode = traceBackKDNodes.pop();
-			double tmpDistance = disCalculator.calculateDistance(targetPoint, traceKDNode.vector);
-			if (tmpDistance < minDistance) {
-				nearestPoint = traceKDNode.vector;
-				minDistance = tmpDistance;
-			}
-
-			int d = traceKDNode.splitD;
-			double verticalDistance = Math.abs(targetPoint.data[d] - traceKDNode.vector.data[d]);
-			if (verticalDistance >= minDistance) {
-				continue;
-			}
-			if (targetPoint.data[d] <= traceKDNode.vector.data[d]) {
-				if (traceKDNode.right != null) {
-					traceBackKDNodes.push(traceKDNode.right);
-				}
-			} else {
-				if (traceKDNode.left != null) {
-					traceBackKDNodes.push(traceKDNode.left);
-				}
-			}
-		}
-
-		return nearestPoint;
+		
+		return null;
 	}
 }

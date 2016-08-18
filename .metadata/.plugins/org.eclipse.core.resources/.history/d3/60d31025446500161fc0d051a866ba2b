@@ -138,10 +138,12 @@ public class KDTree {
 				if (traceKDNode.right != null) {
 					traceBackKDNodes.push(traceKDNode.right);
 				}
+				
 			} else {
 				if (traceKDNode.left != null) {
 					traceBackKDNodes.push(traceKDNode.left);
 				}
+				
 			}
 		}
 
