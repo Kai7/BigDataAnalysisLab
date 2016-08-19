@@ -1,6 +1,6 @@
 package functions.distanceFunction;
 
-import dataPattern.DataVector;
+import datapattern.DataVector;
 
 public abstract class DistanceFunction {
 	public abstract double calculateDistance(DataVector v1, DataVector v2);

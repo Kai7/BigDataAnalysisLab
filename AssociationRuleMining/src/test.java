@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Stack;
 
 public class test {
 
@@ -45,6 +46,13 @@ public class test {
 			System.out.println(splitString[i]);
 		}
 		
+		Stack<String> tmpStack = new Stack<String>();
+		tmpStack.push("hello");
+		tmpStack.push(null);
+		while(!tmpStack.isEmpty()){
+			String tmpS = tmpStack.pop();
+			System.out.println("this is " + tmpS);
+		}
 	}
 
 }
