@@ -1,0 +1,53 @@
+package ds;
+
+import java.util.HashMap;
+import java.util.HashSet;
+
+public class DecisionTree {
+	DecisionNode root;
+
+	public DecisionTree() {
+		root = null;
+	}
+
+	public void buildTree(String[][] cusInfo, String[] attrs, HashSet<Integer> numattrs, HashSet<Integer> disattrs, int targetIndex) {
+		HashSet<Integer> subInfo = new HashSet<Integer>();
+		for (int i = 0; i < cusInfo.length; i++) {
+			subInfo.add(i);
+		}
+
+		root = detectDecisionAttr(cusInfo, subInfo, attrs, numattrs, disattrs, targetIndex);
+	}
+
+	public DecisionNode detectDecisionAttr(String[][] cusInfo, HashSet<Integer> subInfo, String[] attrs, HashSet<Integer> numattrs, HashSet<Integer> disattrs,
+			int targetIndex) {
+		DecisionNode result = null;
+		HashMap<Integer, Double> mapInfo = new HashMap<Integer, Double>();
+		HashMap<String, HashSet<Integer>> mapAttrSubInfo = null;
+		double minAttrInfo = Double.MAX_VALUE;
+		for (int idxDisAttr : disattrs) {
+			AttrInfoAndMap tmpAttrInfoMap = calculateAttrInfo(cusInfo, subInfo, idxDisAttr, targetIndex);
+			if(tmpAttrInfoMap.attrInfo < minAttrInfo){
+				mapInfo.put(idxDisAttr, tmpAttrInfoMap.mapAttrInfo);
+			}
+			
+		}
+
+		return result;
+	}
+
+	private AttrInfoAndMap calculateAttrInfo(String[][] cusInfo, HashSet<Integer> subInfo, int detectIndex, int targetIndex) {
+		
+		return null;
+	}
+	
+	class AttrInfoAndMap{
+		public double attrInfo;
+		HashMap<String, HashSet<Integer>> mapAttrInfo = null;
+		
+		public AttrInfoAndMap(double a, HashMap<String, HashSet<Integer>> m){
+			attrInfo = a;
+			mapAttrInfo = m;
+		}
+	}
+}

@@ -1,0 +1,14 @@
+package ds;
+
+import java.util.HashMap;
+
+public class DecisionNode {
+	public String attr;
+	public String defaultResult = null;
+	
+	public HashMap<String, DecisionNode> decisionMap;
+	
+	public DecisionNode(String a, HashMap<String, DecisionNode> dmap){
+		
+	}
+}
