@@ -1,0 +1,27 @@
+package testing;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Scanner;
+
+public class Main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		String inDataPath = "";
+		Scanner inputScanner = null;
+		try{
+			inputScanner = new Scanner(new FileInputStream(inDataPath));
+			
+		}catch(Exception e){
+			System.out.println("input file error!");
+			System.exit(0);
+		}
+		
+		
+	}
+
+}

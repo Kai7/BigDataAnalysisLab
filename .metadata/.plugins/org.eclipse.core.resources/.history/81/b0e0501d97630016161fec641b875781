@@ -1,0 +1,16 @@
+package testing;
+
+public class RandomDataSetCreator {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String outDataPath;
+		String currentWorkPath = System.getProperty("user.dir");
+//		System.out.println("currentWorkPath:"+currentWorkPath);
+		outDataPath = currentWorkPath+""
+	}
+
+}
