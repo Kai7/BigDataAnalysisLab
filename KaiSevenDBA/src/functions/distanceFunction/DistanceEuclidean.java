@@ -1,6 +1,6 @@
 package functions.distanceFunction;
 
-import dataPattern.DataVector;
+import datapattern.DataVector;
 
 public class DistanceEuclidean extends DistanceFunction {
 	public static String DEFINITION = "Euclidean";
