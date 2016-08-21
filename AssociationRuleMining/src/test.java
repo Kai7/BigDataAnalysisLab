@@ -69,6 +69,11 @@ public class test {
 		for(int i:testSet){
 			System.out.print(i + "  ");
 		}
+		System.out.println();
+		System.out.println("=========================");
+		System.out.println((int)0.5);
+		System.out.println((int)0.9);
+		System.out.println((int)1.1);
 	}
 
 }
