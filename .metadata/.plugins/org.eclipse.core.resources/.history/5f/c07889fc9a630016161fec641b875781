@@ -1,0 +1,25 @@
+package testing;
+
+import java.io.PrintWriter;
+import java.util.Random;
+
+public class RandomTestDataCreator {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int dataSize = 100;
+		int maxNum = 100;
+		String outDataPath;
+		String currentWorkPath = System.getProperty("user.dir");
+		// System.out.println("currentWorkPath:"+currentWorkPath);
+		outDataPath = currentWorkPath + "/testdata-" + dataSize + ".txt";
+		
+		Random rand = new Random();
+//		for(int i=0;i<dataSize;i++){
+//			System.out.println(rand.nextInt(maxNum+1));
+//		}
+		
+		PrintWriter outpw = new PrintWriter(outDataPath, "UTF-8");
+	}
+
+}

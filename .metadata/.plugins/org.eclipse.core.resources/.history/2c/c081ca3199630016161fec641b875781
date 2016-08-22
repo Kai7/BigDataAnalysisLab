@@ -1,0 +1,20 @@
+package testing;
+
+import java.util.Random;
+
+public class RandomTestDataCreator {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int dataSize = 100;
+		String outDataPath;
+		String currentWorkPath = System.getProperty("user.dir");
+		// System.out.println("currentWorkPath:"+currentWorkPath);
+		outDataPath = currentWorkPath + "/testdata-" + dataSize + ".txt";
+		
+		Random rand = new Random();
+		int min = 1, max = 100;
+		int randomNum = rand.nextInt((max - min) + 1) + min;
+	}
+
+}

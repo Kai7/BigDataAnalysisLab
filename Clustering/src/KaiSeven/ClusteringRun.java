@@ -46,7 +46,7 @@ public class ClusteringRun  extends ApplicationFrame{
 
 
 		double eps = 3;
-		int minpts = 14;
+		int minpts = 15;
 
 
 //		DBSCANCluster = new DBSCAN2d(inDataPath, inDataPath + ".DBSCAN.eps-" + eps + ".minpts-" + minpts + ".result", eps, minpts);
