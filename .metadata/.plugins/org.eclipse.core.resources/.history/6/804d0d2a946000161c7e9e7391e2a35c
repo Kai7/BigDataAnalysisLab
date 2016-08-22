@@ -1,8 +1,0 @@
-package KaiSeven;
-
-public class Graph {
-	public DBSCANPoint[] points;
-	
-	public Graph(int size) {
-	}
-}

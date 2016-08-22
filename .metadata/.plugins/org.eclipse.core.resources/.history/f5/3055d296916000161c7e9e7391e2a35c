@@ -1,6 +1,0 @@
-package KaiSeven;
-
-public class DBSCAN {
-	double Eps;
-	int minPts;
-}
