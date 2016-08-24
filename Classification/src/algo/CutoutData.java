@@ -13,11 +13,12 @@ import java.util.StringTokenizer;
 
 import ds.DecisionTree;
 import ds.DecisionTreeOld;
+import ds.DecisionTreeV2;
 
 public class CutoutData {
 	private static final double RATIO_TRAIN_DATA = 0.7;
 	private static final double RATIO_DETECT_IDENTIFY_ATTR = 0.01;
-	private static final double RATIO_NUMERIC_AS_DISCRETE = 0;
+	private static final double RATIO_NUMERIC_AS_DISCRETE = 0.005;
 
 	private static final boolean SHOW_ATTRIBUTE_CATEGORI = true;
 	private static final boolean SHOW_ATTRIBUTE_IN_PREDICT = false;
@@ -89,9 +90,15 @@ public class CutoutData {
 		// targetAttrIndex,discreteAttrs, numericAttrs);
 		// dtree.buildTree(customersInfo, trainInfo);
 
-		DecisionTreeOld dtree = new DecisionTreeOld();
-		dtree.buildTree(customersInfo, trainInfo, attributes, discreteAttrs, numericAttrs, targetAttrIndex);
+		// DecisionTreeOld dtree = new DecisionTreeOld();
+		// dtree.buildTree(customersInfo, trainInfo, attributes, discreteAttrs,
+		// numericAttrs, targetAttrIndex);
 
+		showAttrValueOf(13);
+		
+		DecisionTreeV2 dtree = new DecisionTreeV2(attributes, targetAttrIndex, discreteAttrs, numericAttrs);
+		dtree.buildTree(customersInfo, trainInfo);
+		
 		System.out.println("Building Decision Tree Complete!");
 
 		int countCurrent = 0;
@@ -166,10 +173,10 @@ public class CutoutData {
 			for (int i : identifyAttrs) {
 				System.out.println("[" + i + "][" + attributes[i] + "]");
 			}
-			System.out.println("++ conditionAttrs +++++++++++++++++++++++++++");
-			for (int i : conditionAttrs) {
-				System.out.println("[" + i + "][" + attributes[i] + "]");
-			}
+			// System.out.println("++ conditionAttrs +++++++++++++++++++++++++++");
+			// for (int i : conditionAttrs) {
+			// System.out.println("[" + i + "][" + attributes[i] + "]");
+			// }
 			System.out.println("++ numericAttrs +++++++++++++++++++++++++++++");
 			for (int i : numericAttrs) {
 				System.out.println("[" + i + "][" + attributes[i] + "]");
@@ -210,6 +217,14 @@ public class CutoutData {
 			}
 			testInfo.addAll(subInfo);
 		}
+	}
+
+	private static void showAttrValueOf(int idxAttr) {
+		System.out.println("== Show Attribute Value =======================");
+		for (int i = 0; i < customersInfo.length; i++) {
+			System.out.println("["+i+"] "+customersInfo[i][idxAttr]);
+		}
+		System.out.println("== Show Attribute Value (END) =================");
 	}
 
 	private static boolean isNumeric(String s) {

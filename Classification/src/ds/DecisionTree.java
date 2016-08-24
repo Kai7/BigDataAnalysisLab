@@ -23,7 +23,9 @@ public class DecisionTree {
 	public void buildTree(String[][] dataInfo, HashSet<Integer> idxTrain) {
 		HashSet<Integer> disattrs = new HashSet<Integer>(idxDisAttrs);
 		HashSet<Integer> numattrs = new HashSet<Integer>(idxNumAttrs);
-
+		
+		root = new DecisionNode();
+		root.setDefaultInfo(dataInfo, idxTrain, idxTarget);
 		root = detectDecisionAttr(dataInfo, idxTrain, disattrs, numattrs);
 	}
 
@@ -117,6 +119,7 @@ public class DecisionTree {
 			result += p * Math.log(p);
 			if (counterResult.get(targetValue) > maxCount) {
 				defaultResult = targetValue;
+				maxCount = counterResult.get(targetValue);
 			}
 		}
 
