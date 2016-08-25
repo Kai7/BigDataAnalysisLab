@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -18,7 +19,7 @@ import ds.DecisionTreeV2;
 public class CutoutData {
 	private static final double RATIO_TRAIN_DATA = 0.7;
 	private static final double RATIO_DETECT_IDENTIFY_ATTR = 0.01;
-	private static final double RATIO_NUMERIC_AS_DISCRETE = 0.005;
+	private static final double RATIO_NUMERIC_AS_DISCRETE = 0.00;
 
 	private static final boolean SHOW_ATTRIBUTE_CATEGORI = true;
 	private static final boolean SHOW_ATTRIBUTE_IN_PREDICT = false;
@@ -94,7 +95,8 @@ public class CutoutData {
 		// dtree.buildTree(customersInfo, trainInfo, attributes, discreteAttrs,
 		// numericAttrs, targetAttrIndex);
 
-		showAttrValueOf(13);
+//		showAttrValueOf(13);
+		showAttrValueCount(18);
 		
 		DecisionTreeV2 dtree = new DecisionTreeV2(attributes, targetAttrIndex, discreteAttrs, numericAttrs);
 		dtree.buildTree(customersInfo, trainInfo);
@@ -225,6 +227,36 @@ public class CutoutData {
 			System.out.println("["+i+"] "+customersInfo[i][idxAttr]);
 		}
 		System.out.println("== Show Attribute Value (END) =================");
+	}
+	private static void showAttrValueCount(int idxAttr) {
+		HashMap<String, Integer> counterResult = new HashMap<String, Integer>();
+		for (int i=0;i<customersInfo.length;i++) {
+			if (counterResult.get(customersInfo[i][idxAttr]) == null) {
+				counterResult.put(customersInfo[i][idxAttr], 1);
+			} else {
+				counterResult.put(customersInfo[i][idxAttr], counterResult.get(customersInfo[i][idxAttr]) + 1);
+			}
+		}
+		System.out.println("== Show Attribute Value Count =============");
+		System.out.println("Attribute : " + attributes[idxAttr]);
+		if(numericAttrs.contains(idxAttr)){
+			System.out.println("Numerical attr");
+			ArrayList<Integer> attrValues = new ArrayList<Integer>();
+			for(String v: counterResult.keySet()){
+				attrValues.add(Integer.parseInt(v));
+			}
+			Collections.sort(attrValues);
+			
+			for(int i=0;i<attrValues.size();i++){
+				String v = Integer.toString(attrValues.get(i));
+				System.out.println(v + " : " + counterResult.get(v));
+			}
+		}else{
+			for (String targetValue : counterResult.keySet()) {
+				System.out.println(targetValue + " : " + counterResult.get(targetValue));
+			}
+		}
+		System.out.println("== Show Attribute Value Count (END) =======");
 	}
 
 	private static boolean isNumeric(String s) {

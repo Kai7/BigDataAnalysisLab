@@ -1,9 +1,12 @@
 package ds;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class DecisionTreeV2 {
+public class DecisionTreeV3 {
 	private static final double RATIO_CURRENT_NOT_BRANCH = 0.9;
 	private static final double RATIO_SIZE_NOT_BRANCH = 0.005;
 
@@ -14,11 +17,11 @@ public class DecisionTreeV2 {
 	HashSet<Integer> idxDisAttrs;
 	HashSet<Integer> idxNumAttrs;
 
-	public DecisionTreeV2() {
+	public DecisionTreeV3() {
 		root = null;
 	}
 
-	public DecisionTreeV2(String[] attrs, int idxtarget, HashSet<Integer> idxdisattrs, HashSet<Integer> idxnumattrs) {
+	public DecisionTreeV3(String[] attrs, int idxtarget, HashSet<Integer> idxdisattrs, HashSet<Integer> idxnumattrs) {
 		root = null;
 		attributes = attrs;
 		idxTarget = idxtarget;
@@ -88,19 +91,35 @@ public class DecisionTreeV2 {
 				m.get(dataTable[i][detectIndex]).add(i);
 			}
 		}
-		double a = 0;
-		double r = 0;
-		for (String attr : m.keySet()) {
-			double p = (double) m.get(attr).size() / idxSubTable.size();
-			a += p * calculateInfo(dataTable, m.get(attr));
-			r += -p * Math.log(p);
-			// System.out.println("r:"+r);
+		
+		if(idxDisAttrs.contains(detectIndex)){
+			double a = 0;
+			double r = 0;
+			for (String attr : m.keySet()) {
+				double p = (double) m.get(attr).size() / idxSubTable.size();
+				a += p * calculateInfo(dataTable, m.get(attr));
+				r += -p * Math.log(p);
+				// System.out.println("r:"+r);
+			}
+			// System.out.println("r/log2:"+r/ Math.log(2));
+			if (r / Math.log(2) > 1) {
+				return new AttrInfoAndMap(a / r / Math.log(2), m);
+			}
+			return new AttrInfoAndMap(a, m);
+		}else{
+			ArrayList<Integer> detectAttrValues = new ArrayList<Integer>();
+			for(String v:m.keySet()){
+				detectAttrValues.add(Integer.parseInt(v));
+			}
+			Collections.sort(detectAttrValues);
+			
+			for(int i=0;i<detectAttrValues.size();i++){
+				System.out.println(detectAttrValues.get(i));
+			}
+			System.exit(1);
+			return null;
 		}
-		// System.out.println("r/log2:"+r/ Math.log(2));
-//		if (r / Math.log(2) > 1) {
-//			return new AttrInfoAndMap(a / r / Math.log(2), m);
-//		}
-		return new AttrInfoAndMap(a, m);
+		
 	}
 
 	private double calculateInfo(String[][] cusInfo, HashSet<Integer> subInfo) {

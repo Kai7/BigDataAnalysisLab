@@ -1,4 +1,7 @@
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Stack;
 
@@ -62,18 +65,29 @@ public class test {
 		testSet.add(1);
 		testSet.add(2);
 		testSet.add(3);
-		
+
 		HashSet<Integer> testSet2 = new HashSet<Integer>(testSet);
-		
+
 		testSet2.remove(1);
-		for(int i:testSet){
+		for (int i : testSet) {
 			System.out.print(i + "  ");
 		}
 		System.out.println();
 		System.out.println("=========================");
-		System.out.println((int)0.5);
-		System.out.println((int)0.9);
-		System.out.println((int)1.1);
+		System.out.println((int) 0.5);
+		System.out.println((int) 0.9);
+		System.out.println((int) 1.1);
+
+		System.out.println("=========================");
+
+		ArrayList<String> ttarrl = new ArrayList<>();
+		for (int i = 1000; i > 0; i--) {
+			ttarrl.add(Integer.toString(i));
+		}
+		Collections.sort(ttarrl);
+		for (int i = 0; i < ttarrl.size(); i++) {
+			System.out.println("[" + i + "]:" + ttarrl.get(i));
+		}
 	}
 
 }
