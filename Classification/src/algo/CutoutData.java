@@ -15,6 +15,7 @@ import java.util.StringTokenizer;
 import ds.DecisionTree;
 import ds.DecisionTreeOld;
 import ds.DecisionTreeV2;
+import ds.DecisionTreeV3;
 
 public class CutoutData {
 	private static final double RATIO_TRAIN_DATA = 0.7;
@@ -96,9 +97,12 @@ public class CutoutData {
 		// numericAttrs, targetAttrIndex);
 
 //		showAttrValueOf(13);
-		showAttrValueCount(18);
+//		showAttrValueCount(18);
 		
-		DecisionTreeV2 dtree = new DecisionTreeV2(attributes, targetAttrIndex, discreteAttrs, numericAttrs);
+//		DecisionTreeV2 dtree = new DecisionTreeV2(attributes, targetAttrIndex, discreteAttrs, numericAttrs);
+//		dtree.buildTree(customersInfo, trainInfo);
+		
+		DecisionTreeV3 dtree = new DecisionTreeV3(attributes, targetAttrIndex, discreteAttrs, numericAttrs);
 		dtree.buildTree(customersInfo, trainInfo);
 		
 		System.out.println("Building Decision Tree Complete!");

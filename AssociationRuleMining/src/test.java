@@ -81,13 +81,29 @@ public class test {
 		System.out.println("=========================");
 
 		ArrayList<String> ttarrl = new ArrayList<>();
-		for (int i = 1000; i > 0; i--) {
+		for (int i = 100; i > 0; i--) {
 			ttarrl.add(Integer.toString(i));
 		}
 		Collections.sort(ttarrl);
 		for (int i = 0; i < ttarrl.size(); i++) {
 			System.out.println("[" + i + "]:" + ttarrl.get(i));
 		}
+		System.out.println("=========================");
+		
+		HashSet<String> tesths = new HashSet<String>();
+		tesths.add("apple");
+		tesths.add("banana");
+		String ts = "apple";
+		if(tesths.contains(ts)){
+			System.out.println("contains!");
+		}else{
+			System.out.println("don't contains!");
+		}
+		
+		System.out.println("=========================");
+		System.out.println(Integer.toString(Integer.MAX_VALUE));
 	}
+	
+	
 
 }

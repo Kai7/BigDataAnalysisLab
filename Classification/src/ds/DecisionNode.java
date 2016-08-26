@@ -48,7 +48,8 @@ public class DecisionNode {
 			}
 		}
 
-		this.info = tmpInfo;
+		this.info = -tmpInfo;
+		System.out.println(this.info);
 		this.defaultResult = tmpResult;
 		this.defaultResultRatio = (double) maxCount / idxSubTable.size();
 	}

@@ -49,13 +49,13 @@ public class DecisionTreeV2 {
 		}
 
 		HashMap<String, HashSet<Integer>> mapAttrSubInfo = null;
-		double minAttrInfo = Double.MAX_VALUE;
+		double minAttrInfoRatio = Double.MAX_VALUE;
 		int minAttrInfoIndex = -1;
 		for (int idxDisAttr : disattrs) {
 			AttrInfoAndMap tmpAttrInfoMap = calculateAttrInfo(dataTable, idxSubTable, idxDisAttr);
-			if (tmpAttrInfoMap.attrInfo < minAttrInfo) {
+			if ((DNode.info-tmpAttrInfoMap.attrInfo)/tmpAttrInfoMap.splitInfo < minAttrInfoRatio) {
 				minAttrInfoIndex = idxDisAttr;
-				minAttrInfo = tmpAttrInfoMap.attrInfo;
+				minAttrInfoRatio = (DNode.info-tmpAttrInfoMap.attrInfo)/tmpAttrInfoMap.splitInfo;
 				mapAttrSubInfo = tmpAttrInfoMap.mapAttrInfo;
 			}
 		}
@@ -100,7 +100,7 @@ public class DecisionTreeV2 {
 //		if (r / Math.log(2) > 1) {
 //			return new AttrInfoAndMap(a / r / Math.log(2), m);
 //		}
-		return new AttrInfoAndMap(a, m);
+		return new AttrInfoAndMap(a,r, m);
 	}
 
 	private double calculateInfo(String[][] cusInfo, HashSet<Integer> subInfo) {
@@ -117,7 +117,7 @@ public class DecisionTreeV2 {
 			double p = (double) tmpMap.get(targetValue) / subInfo.size();
 			result += p * Math.log(p);
 		}
-
+		
 		return -result / Math.log(2);
 	}
 
@@ -148,10 +148,12 @@ public class DecisionTreeV2 {
 
 	class AttrInfoAndMap {
 		public double attrInfo;
+		public double splitInfo;
 		HashMap<String, HashSet<Integer>> mapAttrInfo = null;
 
-		public AttrInfoAndMap(double a, HashMap<String, HashSet<Integer>> m) {
+		public AttrInfoAndMap(double a,double s, HashMap<String, HashSet<Integer>> m) {
 			attrInfo = a;
+			splitInfo = s;
 			mapAttrInfo = m;
 		}
 	}
